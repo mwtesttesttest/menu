@@ -9,17 +9,17 @@
       font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background: url('tlo.jpg') no-repeat center center fixed;
+      background: url('TLO.jpg') no-repeat center center fixed;
       background-size: cover;
-      color: #fff;
+      color: #222; /* ciemny tekst */
       overflow-x: hidden;
     }
 
     h1 {
       text-align: center;
       padding: 40px 20px 20px 20px;
-      font-size: 2.5em;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+      font-size: 2em;
+      color: #222;
     }
 
     .menu-container {
@@ -32,18 +32,22 @@
     .menu-item {
       display: flex;
       align-items: center;
-      justify-content: center;
-      width: 90%;
+      justify-content: flex-start;
+      width: 100%;
       margin: 50px 0;
       position: relative;
       opacity: 0;
-      transform: translateX(-100px);
       transition: all 1s ease;
+    }
+
+    .menu-item.left {
+      flex-direction: row;
+      transform: translateX(-120px);
     }
 
     .menu-item.right {
       flex-direction: row-reverse;
-      transform: translateX(100px);
+      transform: translateX(120px);
     }
 
     .menu-item.visible {
@@ -52,24 +56,31 @@
     }
 
     .menu-item img {
-      width: 300px;
-      height: 300px;
-      border-radius: 50% 50% 0 0;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      flex-shrink: 0;
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      /* tylko połowa widoczna */
+      clip-path: inset(0 50% 0 0); /* pół okręgu od lewej */
+      margin-right: -100px; /* wcięcie w stronę treści */
     }
 
-    .menu-item img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+    .menu-item.right img {
+      clip-path: inset(0 0 0 50%); /* pół okręgu od prawej */
+      margin-left: -100px;
+      margin-right: 0;
     }
 
     .menu-text {
-      max-width: 400px;
-      padding: 20px;
+      background: rgba(255,255,255,0.8);
+      padding: 20px 25px;
+      border-radius: 20px;
+      max-width: 70%;
       text-align: left;
+      z-index: 2;
     }
 
     .menu-item.right .menu-text {
@@ -77,40 +88,44 @@
     }
 
     .menu-text h2 {
-      font-size: 1.8em;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+      margin: 0 0 10px 0;
+      font-size: 1.5em;
+      color: #222;
     }
 
     .menu-text p {
-      font-size: 1.2em;
-      line-height: 1.5em;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+      margin: 0;
+      font-size: 1.1em;
+      color: #222;
     }
 
     @media (max-width: 600px) {
       .menu-item {
         flex-direction: column !important;
+        align-items: center;
         transform: translateY(50px);
       }
-      .menu-item.right {
-        flex-direction: column !important;
+
+      .menu-item.right, .menu-item.left {
         transform: translateY(50px);
       }
+
       .menu-item.visible {
         transform: translateY(0);
       }
+
       .menu-item img {
-        width: 80%;
-        height: auto;
-        border-radius: 50% 50% 0 0;
-        margin-bottom: 20px;
+        clip-path: circle(50%);
+        width: 150px;
+        height: 150px;
+        margin: 0 0 20px 0;
       }
+
       .menu-text {
+        max-width: 90%;
         text-align: center !important;
       }
     }
-
   </style>
 </head>
 <body>
@@ -154,7 +169,7 @@
   </div>
 
   <script>
-    // Intersection Observer do animacji scroll
+    // Animacja scroll
     const items = document.querySelectorAll('.menu-item');
 
     const observer = new IntersectionObserver(entries => {
@@ -170,3 +185,4 @@
 
 </body>
 </html>
+
