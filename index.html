@@ -11,7 +11,7 @@
       padding: 0;
       background: url('TLO.jpg') no-repeat center center fixed;
       background-size: cover;
-      color: #222; /* ciemny tekst */
+      color: #222;
       overflow-x: hidden;
     }
 
@@ -56,74 +56,73 @@
     }
 
     .menu-item img {
-      width: 200px;
-      height: 200px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       object-fit: cover;
       position: relative;
       z-index: 1;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-      /* tylko połowa widoczna */
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
       clip-path: inset(0 50% 0 0); /* pół okręgu od lewej */
-      margin-right: -100px; /* wcięcie w stronę treści */
+      margin-right: 30px; /* trochę odsunięcia tekstu */
     }
 
     .menu-item.right img {
       clip-path: inset(0 0 0 50%); /* pół okręgu od prawej */
-      margin-left: -100px;
+      margin-left: 30px;
       margin-right: 0;
     }
 
     .menu-text {
-      background: rgba(255,255,255,0.8);
-      padding: 20px 25px;
+      background: rgba(255,255,255,0.85);
+      padding: 15px 20px;
       border-radius: 20px;
       max-width: 70%;
       text-align: left;
       z-index: 2;
-    }
-
-    .menu-item.right .menu-text {
-      text-align: right;
+      font-size: 1em;
+      transition: transform 0.5s ease, opacity 0.5s ease;
     }
 
     .menu-text h2 {
-      margin: 0 0 10px 0;
-      font-size: 1.5em;
+      margin: 0 0 8px 0;
+      font-size: 1.3em;
       color: #222;
     }
 
     .menu-text p {
       margin: 0;
-      font-size: 1.1em;
+      font-size: 1em;
       color: #222;
     }
 
     @media (max-width: 600px) {
       .menu-item {
-        flex-direction: column !important;
-        align-items: center;
-        transform: translateY(50px);
+        flex-direction: row;
+        justify-content: flex-start;
+        transform: translateX(0);
+        margin: 30px 0;
       }
 
-      .menu-item.right, .menu-item.left {
-        transform: translateY(50px);
-      }
-
-      .menu-item.visible {
-        transform: translateY(0);
+      .menu-item.right {
+        flex-direction: row;
       }
 
       .menu-item img {
-        clip-path: circle(50%);
-        width: 150px;
-        height: 150px;
-        margin: 0 0 20px 0;
+        width: 80px;
+        height: 80px;
+        clip-path: inset(0 50% 0 0);
+        margin: 0 15px 0 0;
+      }
+
+      .menu-item.right img {
+        clip-path: inset(0 50% 0 0);
+        margin: 0 15px 0 0;
       }
 
       .menu-text {
-        max-width: 90%;
-        text-align: center !important;
+        max-width: 75%;
+        font-size: 0.95em;
       }
     }
   </style>
@@ -185,5 +184,3 @@
 
 </body>
 </html>
-
-
