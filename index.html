@@ -9,10 +9,9 @@
       font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background: url('TLO.jpg') no-repeat center center fixed;
-      background-size: cover;
       color: #222;
       overflow-x: hidden;
+      background-color: #f5f5f5;
     }
 
     h1 {
@@ -30,9 +29,12 @@
       display: flex;
       align-items: center;
       width: 100%;
-      height: 100vh; /* pełna wysokość ekranu telefonu */
+      height: 80vh; /* zmniejszona wysokość */
       position: relative;
       overflow: hidden;
+      background: url('TLO.jpg') no-repeat center top;
+      background-size: auto 120%; /* tło nie rozciągnięte na całość */
+      background-attachment: fixed; /* delikatny parallax */
     }
 
     .menu-item.left {
@@ -76,6 +78,14 @@
       margin-left: 20px;
       margin-right: 20px;
       transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+      opacity: 0; /* początkowo niewidoczny tekst */
+      transform: translateY(30px); /* lekki efekt wejścia */
+    }
+
+    .menu-item.visible .menu-text {
+      opacity: 1;
+      transform: translateY(0);
+      transition: transform 0.6s ease-out, opacity 0.6s ease-out;
     }
 
     .menu-item.right .menu-text {
@@ -158,13 +168,19 @@
       items.forEach(item => {
         const rect = item.getBoundingClientRect();
         const img = item.querySelector('img');
+        const text = item.querySelector('.menu-text');
 
-        // Przesunięcie obrazka w zależności od scrolla
+        // Animacja półkola
         const offset = rect.top / window.innerHeight;
         if(item.classList.contains('left')){
           img.style.transform = `translateX(${Math.min(0, -50 + offset*50)}%)`;
         } else {
           img.style.transform = `translateX(${Math.max(0, 50 - offset*50)}%)`;
+        }
+
+        // Wyświetlanie tekstu po wejściu w widok
+        if(rect.top < window.innerHeight*0.7 && rect.bottom > window.innerHeight*0.3){
+          item.classList.add('visible');
         }
       });
     }
@@ -175,4 +191,3 @@
 
 </body>
 </html>
-
