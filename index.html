@@ -9,7 +9,7 @@
       font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background: url('tlo.jpg') no-repeat center center fixed;
+      background: url('TLO.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #222;
       overflow-x: hidden;
@@ -17,37 +17,32 @@
 
     h1 {
       text-align: center;
-      padding: 40px 20px 20px 20px;
+      padding: 20px;
       font-size: 2em;
       color: #222;
     }
 
     .menu-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       width: 100%;
     }
 
     .menu-item {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
       width: 100%;
-      margin: 50px 0;
+      height: 100vh; /* pełna wysokość ekranu telefonu */
       position: relative;
       opacity: 0;
       transition: all 1s ease;
     }
 
     .menu-item.left {
-      flex-direction: row;
-      transform: translateX(-120px);
+      justify-content: flex-start;
     }
 
     .menu-item.right {
+      justify-content: flex-end;
       flex-direction: row-reverse;
-      transform: translateX(120px);
     }
 
     .menu-item.visible {
@@ -56,37 +51,44 @@
     }
 
     .menu-item img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
+      width: 60vw; /* duże półkola */
+      height: 100%;
       object-fit: cover;
-      position: relative;
-      z-index: 1;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      clip-path: inset(0 50% 0 0); /* pół okręgu od lewej */
-      margin-right: 30px; /* trochę odsunięcia tekstu */
+      border-radius: 50%;
+      clip-path: ellipse(50% 50% at 50% 50%);
+      position: absolute;
+      top: 0;
+    }
+
+    .menu-item.left img {
+      left: -30vw; /* przesunięcie tak, żeby ścięta część była przy krawędzi */
+      clip-path: ellipse(50% 50% at 0% 50%);
     }
 
     .menu-item.right img {
-      clip-path: inset(0 0 0 50%); /* pół okręgu od prawej */
-      margin-left: 30px;
-      margin-right: 0;
+      right: -30vw;
+      clip-path: ellipse(50% 50% at 100% 50%);
     }
 
     .menu-text {
-      background: rgba(255,255,255,0.85);
-      padding: 15px 20px;
-      border-radius: 20px;
-      max-width: 70%;
-      text-align: left;
+      position: relative;
       z-index: 2;
-      font-size: 1em;
-      transition: transform 0.5s ease, opacity 0.5s ease;
+      max-width: 70%;
+      background: rgba(255,255,255,0.85);
+      padding: 20px 25px;
+      border-radius: 20px;
+      font-size: 1.2em;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    .menu-item.right .menu-text {
+      text-align: left;
     }
 
     .menu-text h2 {
-      margin: 0 0 8px 0;
-      font-size: 1.3em;
+      margin: 0 0 10px 0;
+      font-size: 1.5em;
       color: #222;
     }
 
@@ -97,32 +99,18 @@
     }
 
     @media (max-width: 600px) {
-      .menu-item {
-        flex-direction: row;
-        justify-content: flex-start;
-        transform: translateX(0);
-        margin: 30px 0;
-      }
-
-      .menu-item.right {
-        flex-direction: row;
-      }
-
       .menu-item img {
-        width: 80px;
-        height: 80px;
-        clip-path: inset(0 50% 0 0);
-        margin: 0 15px 0 0;
+        width: 80vw;
+        left: -40vw;
       }
 
       .menu-item.right img {
-        clip-path: inset(0 50% 0 0);
-        margin: 0 15px 0 0;
+        right: -40vw;
       }
 
       .menu-text {
-        max-width: 75%;
-        font-size: 0.95em;
+        font-size: 1em;
+        max-width: 80%;
       }
     }
   </style>
@@ -168,9 +156,7 @@
   </div>
 
   <script>
-    // Animacja scroll
     const items = document.querySelectorAll('.menu-item');
-
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if(entry.isIntersecting){
@@ -178,7 +164,6 @@
         }
       });
     }, { threshold: 0.3 });
-
     items.forEach(item => observer.observe(item));
   </script>
 
