@@ -6,114 +6,167 @@
   <title>Menu Restauracji</title>
   <style>
     body {
+      font-family: 'Arial', sans-serif;
       margin: 0;
-      font-family: "Georgia", serif;
-      background: #fafafa;
-      color: #333;
-      line-height: 1.6;
+      padding: 0;
+      background: url('tlo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    header {
+    h1 {
       text-align: center;
-      padding: 40px 20px;
-      background: #fff8e7;
-      border-bottom: 2px solid #e0c97f;
+      padding: 40px 20px 20px 20px;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.2rem;
-      color: #6a4e0f;
-    }
-
-    .menu-section {
+    .menu-container {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .menu-section:nth-child(even) {
-      flex-direction: row-reverse;
-      background: #fff;
-    }
-
-    .menu-image {
-      flex: 1 1 40%;
-      padding: 10px;
-    }
-
-    .menu-image img {
       width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
     }
 
-    .menu-description {
-      flex: 1 1 60%;
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 90%;
+      margin: 50px 0;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-100px);
+      transition: all 1s ease;
+    }
+
+    .menu-item.right {
+      flex-direction: row-reverse;
+      transform: translateX(100px);
+    }
+
+    .menu-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .menu-item img {
+      width: 300px;
+      height: 300px;
+      border-radius: 50% 50% 0 0;
+      object-fit: cover;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      flex-shrink: 0;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    .menu-item img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+    }
+
+    .menu-text {
+      max-width: 400px;
       padding: 20px;
+      text-align: left;
     }
 
-    .menu-description h2 {
-      margin-top: 0;
-      font-size: 1.8rem;
-      color: #6a4e0f;
+    .menu-item.right .menu-text {
+      text-align: right;
     }
 
-    .menu-description p {
-      font-size: 1.1rem;
-      margin-bottom: 0;
+    .menu-text h2 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
     }
 
-    @media (max-width: 768px) {
-      .menu-section {
+    .menu-text p {
+      font-size: 1.2em;
+      line-height: 1.5em;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    }
+
+    @media (max-width: 600px) {
+      .menu-item {
         flex-direction: column !important;
-        text-align: center;
+        transform: translateY(50px);
       }
-
-      .menu-description {
-        padding: 10px;
+      .menu-item.right {
+        flex-direction: column !important;
+        transform: translateY(50px);
+      }
+      .menu-item.visible {
+        transform: translateY(0);
+      }
+      .menu-item img {
+        width: 80%;
+        height: auto;
+        border-radius: 50% 50% 0 0;
+        margin-bottom: 20px;
+      }
+      .menu-text {
+        text-align: center !important;
       }
     }
+
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Nasze Menu</h1>
-  </header>
+  <h1>Menu Dnia</h1>
 
-  <section class="menu-section">
-    <div class="menu-image">
-      <img src="zupa.jpg" alt="Zupa dnia">
-    </div>
-    <div class="menu-description">
-      <h2>Zupa dnia</h2>
-      <p>Aromatyczna zupa krem z dyni z nutą imbiru, podawana z chrupiącymi grzankami.</p>
-    </div>
-  </section>
+  <div class="menu-container">
 
-  <section class="menu-section">
-    <div class="menu-image">
-      <img src="danie_glowne.jpg" alt="Danie główne">
+    <div class="menu-item left">
+      <img src="images/zupa.jpg" alt="Zupa dnia">
+      <div class="menu-text">
+        <h2>Zupa dnia</h2>
+        <p>Pomidorowa z ryżem i świeżą bazylią</p>
+      </div>
     </div>
-    <div class="menu-description">
-      <h2>Danie główne</h2>
-      <p>Polędwica wołowa w sosie pieprzowym z puree ziemniaczanym i sezonowymi warzywami.</p>
-    </div>
-  </section>
 
-  <section class="menu-section">
-    <div class="menu-image">
-      <img src="deser.jpg" alt="Deser">
+    <div class="menu-item right">
+      <img src="images/danie_glowne.jpg" alt="Danie główne">
+      <div class="menu-text">
+        <h2>Danie główne</h2>
+        <p>Polędwiczki wieprzowe w sosie śmietanowym, podawane z ziemniakami puree</p>
+      </div>
     </div>
-    <div class="menu-description">
-      <h2>Deser</h2>
-      <p>Delikatny sernik waniliowy z musem malinowym i świeżymi owocami.</p>
+
+    <div class="menu-item left">
+      <img src="images/deser.jpg" alt="Deser">
+      <div class="menu-text">
+        <h2>Deser</h2>
+        <p>Sernik z malinami i świeżą miętą</p>
+      </div>
     </div>
-  </section>
+
+    <div class="menu-item right">
+      <img src="images/salatka.jpg" alt="Sałatka">
+      <div class="menu-text">
+        <h2>Sałatka</h2>
+        <p>Mix sałat z orzechami, suszoną żurawiną i sosem miodowo-musztardowym</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Intersection Observer do animacji scroll
+    const items = document.querySelectorAll('.menu-item');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    items.forEach(item => observer.observe(item));
+  </script>
 
 </body>
 </html>
