@@ -32,8 +32,7 @@
       width: 100%;
       height: 100vh; /* pełna wysokość ekranu telefonu */
       position: relative;
-      opacity: 0;
-      transition: all 1s ease;
+      overflow: hidden;
     }
 
     .menu-item.left {
@@ -45,23 +44,19 @@
       flex-direction: row-reverse;
     }
 
-    .menu-item.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
     .menu-item img {
-      width: 60vw; /* duże półkola */
+      width: 60vw;
       height: 100%;
       object-fit: cover;
       border-radius: 50%;
-      clip-path: ellipse(50% 50% at 50% 50%);
       position: absolute;
       top: 0;
+      z-index: 1;
+      transition: transform 0.5s ease-out;
     }
 
     .menu-item.left img {
-      left: -30vw; /* przesunięcie tak, żeby ścięta część była przy krawędzi */
+      left: -30vw;
       clip-path: ellipse(50% 50% at 0% 50%);
     }
 
@@ -80,6 +75,7 @@
       font-size: 1.2em;
       margin-left: 20px;
       margin-right: 20px;
+      transition: transform 0.5s ease-out, opacity 0.5s ease-out;
     }
 
     .menu-item.right .menu-text {
@@ -157,14 +153,24 @@
 
   <script>
     const items = document.querySelectorAll('.menu-item');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
+
+    function handleScroll() {
+      items.forEach(item => {
+        const rect = item.getBoundingClientRect();
+        const img = item.querySelector('img');
+
+        // Przesunięcie obrazka w zależności od scrolla
+        const offset = rect.top / window.innerHeight;
+        if(item.classList.contains('left')){
+          img.style.transform = `translateX(${Math.min(0, -50 + offset*50)}%)`;
+        } else {
+          img.style.transform = `translateX(${Math.max(0, 50 - offset*50)}%)`;
         }
       });
-    }, { threshold: 0.3 });
-    items.forEach(item => observer.observe(item));
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // inicjalnie
   </script>
 
 </body>
