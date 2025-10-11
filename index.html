@@ -4,15 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menu Restauracji</title>
-
-  <!-- Nowoczesna czcionka -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
@@ -22,19 +16,9 @@
       background: url('TLO.jpg') center center / cover no-repeat fixed;
       scroll-behavior: smooth;
     }
+    h1 { text-align: center; padding: 25px; font-size: 1.8em; color: #222; letter-spacing: 0.5px; font-weight: 600; }
 
-    h1 {
-      text-align: center;
-      padding: 25px;
-      font-size: 1.8em;
-      color: #222;
-      letter-spacing: 0.5px;
-      font-weight: 600;
-    }
-
-    .menu-container {
-      width: 100%;
-    }
+    .menu-container { width: 100%; }
 
     .menu-item {
       display: flex;
@@ -44,15 +28,12 @@
       position: relative;
       overflow: hidden;
       transition: all 0.6s ease-out;
+      opacity: 0;
+      transform: translateY(50px);
     }
 
-    .menu-item.left {
-      flex-direction: row;
-    }
-
-    .menu-item.right {
-      flex-direction: row-reverse;
-    }
+    .menu-item.left { flex-direction: row; }
+    .menu-item.right { flex-direction: row-reverse; }
 
     .menu-item img {
       width: 50vw;
@@ -73,73 +54,29 @@
       backdrop-filter: blur(5px);
       padding: 25px 30px;
       border-radius: 20px;
-      transition: all 0.6s ease-out;
-      opacity: 0;
-      transform: translateY(30px);
     }
 
-    .menu-item.visible .menu-text {
+    .menu-item.visible {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    .menu-item.left .menu-text {
-      margin-left: 5vw;
-      text-align: left;
-    }
-
-    .menu-item.right .menu-text {
-      margin-right: 5vw;
-      text-align: right;
     }
 
     .menu-item.visible img {
       transform: scale(1.05);
     }
 
-    h2 {
-      font-size: 1.2em;
-      font-weight: 600;
-      margin: 0 0 8px 0;
-      color: #111;
-    }
+    .menu-item.left .menu-text { margin-left: 5vw; text-align: left; }
+    .menu-item.right .menu-text { margin-right: 5vw; text-align: right; }
 
-    p {
-      font-size: 1em;
-      font-weight: 400;
-      margin: 3px 0;
-      line-height: 1.5;
-      color: #333;
-    }
+    h2 { font-size: 1.2em; font-weight: 600; margin: 0 0 8px 0; color: #111; }
+    p { font-size: 1em; font-weight: 400; margin: 3px 0; line-height: 1.5; color: #333; }
 
     @media (max-width: 600px) {
-      .menu-item {
-        flex-direction: column !important;
-        justify-content: center;
-        height: auto;
-        padding: 40px 0;
-      }
-
-      .menu-item img {
-        width: 70vw;
-        height: 70vw;
-        margin-bottom: 20px;
-      }
-
-      .menu-text {
-        width: 80%;
-        text-align: center !important;
-        margin: 0;
-        font-size: 1em;
-      }
-
-      h2 {
-        font-size: 1.1em;
-      }
-
-      p {
-        font-size: 0.95em;
-      }
+      .menu-item { flex-direction: column !important; justify-content: center; height: auto; padding: 40px 0; }
+      .menu-item img { width: 70vw; height: 70vw; margin-bottom: 20px; }
+      .menu-text { width: 80%; text-align: center !important; margin: 0; font-size: 1em; }
+      h2 { font-size: 1.1em; }
+      p { font-size: 0.95em; }
     }
   </style>
 </head>
@@ -148,16 +85,14 @@
 
   <div class="menu-container">
 
-    <!-- ZUPA SERWOWANA -->
     <div class="menu-item left">
       <img src="zupa.jpg" alt="Zupa serwowana">
       <div class="menu-text">
         <h2>ZUPA SERWOWANA</h2>
-        <p>Tradycyjny rosół drobiowy z chuj makaronem domowym</p>
+        <p>Tradycyjny rosół drobiowy z makaronem domowym</p>
       </div>
     </div>
 
-    <!-- DRUGIE DANIE SERWOWANE -->
     <div class="menu-item right">
       <img src="obiad.png" alt="Drugie danie serwowane">
       <div class="menu-text">
@@ -166,9 +101,8 @@
       </div>
     </div>
 
-    <!-- ZUPY W BUFECIE -->
     <div class="menu-item left">
-      <img src="makaronpenne.png" alt="Zupy w bufecie">
+      <img src="zupawbemarach.png" alt="Zupy w bufecie">
       <div class="menu-text">
         <h2>ZUPY W BUFECIE</h2>
         <p>Żurek na wędzonym żeberku</p>
@@ -176,7 +110,6 @@
       </div>
     </div>
 
-    <!-- CIEPŁE PRZEKĄSKI W BUFECIE -->
     <div class="menu-item right">
       <img src="ciepleprzekaskiwbufecie.png" alt="Ciepłe przekąski w bufecie">
       <div class="menu-text">
@@ -187,9 +120,8 @@
       </div>
     </div>
 
-    <!-- DODATKI -->
     <div class="menu-item left">
-      <img src="ziemniakipieczone.png" alt="Dodatki">
+      <img src="pieczoneziemniaki.png" alt="Dodatki">
       <div class="menu-text">
         <h2>DODATKI</h2>
         <p>Ziemniaczki pieczone</p>
@@ -198,9 +130,8 @@
       </div>
     </div>
 
-    <!-- PRZEKĄSKI ZIMNE -->
     <div class="menu-item right">
-      <img src="półmisekmięs.png" alt="Przekąski zimne">
+      <img src="polmisekmies.png" alt="Przekąski zimne">
       <div class="menu-text">
         <h2>PRZEKĄSKI ZIMNE</h2>
         <p>Półmisek mięs pieczonych</p>
@@ -216,9 +147,8 @@
       </div>
     </div>
 
-    <!-- SŁODKOŚCI I NAPOJE -->
     <div class="menu-item left">
-      <img src="słodkości.png" alt="Słodkości i napoje">
+      <img src="slodkosci.png" alt="Słodkości i napoje">
       <div class="menu-text">
         <h2>SŁODKOŚCI I NAPOJE</h2>
         <p>Ręcznie robione ciasta</p>
@@ -231,6 +161,7 @@
         <p>Coca-Cola</p>
         <p>Mirinda</p>
         <p>Sok pomarańczowy</p>
+        <p>*możliwe mleko krowie lub mleko roślinne</p>
       </div>
     </div>
 
