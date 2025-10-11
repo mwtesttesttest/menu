@@ -5,13 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu Restauracji</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
       color: #222;
       overflow-x: hidden;
-      background-color: #f5f5f5;
+      background: url('TLO.jpg') center center / cover no-repeat fixed;
+      scroll-behavior: smooth;
     }
 
     h1 {
@@ -19,6 +24,7 @@
       padding: 20px;
       font-size: 2em;
       color: #222;
+      letter-spacing: 1px;
     }
 
     .menu-container {
@@ -28,95 +34,80 @@
     .menu-item {
       display: flex;
       align-items: center;
-      width: 100%;
-      height: 80vh; /* zmniejszona wysokość */
+      justify-content: space-between;
+      height: 90vh;
       position: relative;
       overflow: hidden;
-      background: url('TLO.jpg') no-repeat center top;
-      background-size: auto 120%; /* tło nie rozciągnięte na całość */
-      background-attachment: fixed; /* delikatny parallax */
-    }
-
-    .menu-item.left {
-      justify-content: flex-start;
-    }
-
-    .menu-item.right {
-      justify-content: flex-end;
-      flex-direction: row-reverse;
+      transition: all 0.6s ease-out;
     }
 
     .menu-item img {
-      width: 60vw;
+      width: 100vw;
       height: 100%;
       object-fit: cover;
-      border-radius: 50%;
       position: absolute;
       top: 0;
       z-index: 1;
-      transition: transform 0.5s ease-out;
+      transition: transform 1s ease-out;
     }
 
     .menu-item.left img {
-      left: -30vw;
-      clip-path: ellipse(50% 50% at 0% 50%);
+      left: -50vw; /* widoczna połowa zdjęcia */
+      clip-path: inset(0 50% 0 0);
     }
 
     .menu-item.right img {
-      right: -30vw;
-      clip-path: ellipse(50% 50% at 100% 50%);
+      right: -50vw; /* widoczna połowa zdjęcia */
+      clip-path: inset(0 0 0 50%);
     }
 
     .menu-text {
       position: relative;
       z-index: 2;
-      max-width: 70%;
-      background: rgba(255,255,255,0.85);
-      padding: 20px 25px;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 20px;
       border-radius: 20px;
-      font-size: 1.2em;
-      margin-left: 20px;
-      margin-right: 20px;
-      transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-      opacity: 0; /* początkowo niewidoczny tekst */
-      transform: translateY(30px); /* lekki efekt wejścia */
+      font-size: 1.1em;
+      width: 70%;
+      max-width: 300px;
+      line-height: 1.4;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
     }
 
     .menu-item.visible .menu-text {
       opacity: 1;
       transform: translateY(0);
-      transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+    }
+
+    .menu-item.left .menu-text {
+      margin-left: auto;
+      margin-right: 10vw;
+      text-align: right;
     }
 
     .menu-item.right .menu-text {
+      margin-left: 10vw;
       text-align: left;
     }
 
-    .menu-text h2 {
-      margin: 0 0 10px 0;
-      font-size: 1.5em;
-      color: #222;
-    }
-
-    .menu-text p {
-      margin: 0;
-      font-size: 1em;
-      color: #222;
-    }
-
     @media (max-width: 600px) {
-      .menu-item img {
-        width: 80vw;
-        left: -40vw;
-      }
-
-      .menu-item.right img {
-        right: -40vw;
+      .menu-item {
+        height: 80vh;
       }
 
       .menu-text {
         font-size: 1em;
-        max-width: 80%;
+        width: 80%;
+      }
+
+      .menu-item.left .menu-text {
+        margin-right: 8vw;
+      }
+
+      .menu-item.right .menu-text {
+        margin-left: 8vw;
       }
     }
   </style>
@@ -128,34 +119,26 @@
   <div class="menu-container">
 
     <div class="menu-item left">
-      <img src="https://raw.githubusercontent.com/mwtesttesttest/menu/refs/heads/main/zupa.jpg" alt="Zupa dnia">
+      <img src="zupa.jpg" alt="Tradycyjny rosół drobiowy z makaronem drobiowym">
       <div class="menu-text">
-        <h2>Zupa dnia</h2>
-        <p>Pomidorowa z ryżem i świeżą bazylią</p>
+        <h2>Tradycyjny rosół drobiowy</h2>
+        <p>z makaronem drobiowym</p>
       </div>
     </div>
 
     <div class="menu-item right">
-      <img src="images/danie_glowne.jpg" alt="Danie główne">
+      <img src="obiad.jpg" alt="Filet z kurczaka faszerowany serem mozzarella">
       <div class="menu-text">
-        <h2>Danie główne</h2>
-        <p>Polędwiczki wieprzowe w sosie śmietanowym, podawane z ziemniakami puree</p>
+        <h2>Filet z kurczaka</h2>
+        <p>faszerowany serem mozzarella, z sosem pieczeniowym, puree ziemniaczanym z koperkiem i surówką Coleslaw</p>
       </div>
     </div>
 
     <div class="menu-item left">
-      <img src="images/deser.jpg" alt="Deser">
+      <img src="makaronpenne.jpg" alt="Makaron penne z kurczakiem w sosie serowym">
       <div class="menu-text">
-        <h2>Deser</h2>
-        <p>Sernik z malinami i świeżą miętą</p>
-      </div>
-    </div>
-
-    <div class="menu-item right">
-      <img src="images/salatka.jpg" alt="Sałatka">
-      <div class="menu-text">
-        <h2>Sałatka</h2>
-        <p>Mix sałat z orzechami, suszoną żurawiną i sosem miodowo-musztardowym</p>
+        <h2>Makaron Penne</h2>
+        <p>z kurczakiem w sosie serowym</p>
       </div>
     </div>
 
@@ -167,28 +150,23 @@
     function handleScroll() {
       items.forEach(item => {
         const rect = item.getBoundingClientRect();
-        const img = item.querySelector('img');
-        const text = item.querySelector('.menu-text');
 
-        // Animacja półkola
-        const offset = rect.top / window.innerHeight;
-        if(item.classList.contains('left')){
-          img.style.transform = `translateX(${Math.min(0, -50 + offset*50)}%)`;
-        } else {
-          img.style.transform = `translateX(${Math.max(0, 50 - offset*50)}%)`;
-        }
-
-        // Wyświetlanie tekstu po wejściu w widok
-        if(rect.top < window.innerHeight*0.7 && rect.bottom > window.innerHeight*0.3){
+        // animacja tekstu i zdjęcia
+        if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
           item.classList.add('visible');
+          const img = item.querySelector('img');
+          img.style.transform = 'scale(1.05)';
+        } else {
+          item.classList.remove('visible');
+          const img = item.querySelector('img');
+          img.style.transform = 'scale(1)';
         }
       });
     }
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // inicjalnie
+    handleScroll();
   </script>
 
 </body>
 </html>
-
