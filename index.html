@@ -93,10 +93,14 @@
     text-align: center;
   }
 
-  p {
+  /* półprzezroczyste tło dla akapitów */
+  .menu-text p {
     font-size: 1em;
     margin: 5px 0;
     line-height: 1.8;
+    background: rgba(255,255,255,0.5);
+    padding: 8px 12px;
+    border-radius: 10px;
   }
 
   .menu-text p::before { content: "• "; color: #222; }
@@ -220,11 +224,10 @@
   window.addEventListener('scroll', handleScroll);
   handleScroll();
 
-  // paralaksa tła - tło przewija się wzdłuż całej strony
+  // paralaksa tła
   const parallax = document.querySelector('.parallax');
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
-    // tło przesuwa się wolniej od scrolla
     parallax.style.transform = `translateY(${scrollY * 0.05}px)`;
   });
 </script>
