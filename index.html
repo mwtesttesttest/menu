@@ -13,11 +13,13 @@
     padding: 0;
     color: #222;
     scroll-behavior: smooth;
+    /* Tło rozciągnięte na całą długość strony */
     background: url('TLO.jpg') top center no-repeat;
-    background-size: contain;
-    background-attachment: scroll;
+    background-size: cover;
+    background-attachment: fixed;
   }
 
+  /* Nagłówek obrazkowy */
   .header-image {
     width: 100%;
     max-height: 120px;
@@ -35,37 +37,46 @@
     align-items: center;
     position: relative;
     overflow: hidden;
-    transition: all 0.6s ease-out;
     opacity: 0;
     transform: translateY(50px);
-    padding: 30px 0;
+    padding: 40px 0;
+    transition: all 1s ease-out;
   }
 
+  /* animacja fade-in przy scrollu */
+  .menu-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* zdjęcia w kole */
   .menu-item img {
-    width: 60vw;
+    width: 50vw;
     max-width: 360px;
-    height: auto;
+    height: 50vw;
+    max-height: 360px;
     border-radius: 50%;
-    transition: transform 0.8s ease-out;
-    margin-bottom: 15px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    transition: transform 0.8s ease-out, box-shadow 0.5s ease;
     box-shadow: 0 5px 25px rgba(0,0,0,0.35);
   }
 
   .menu-item img:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.45);
   }
 
   .menu-text {
     width: 80%;
     max-width: 420px;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(4px);
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(5px);
     padding: 20px 25px;
-    border-radius: 15px;
+    border-radius: 20px;
     text-align: justify;
+    transition: all 0.5s ease;
   }
-
-  .menu-item.visible { opacity: 1; transform: translateY(0); }
 
   h2 {
     font-size: 1.4em;
@@ -80,12 +91,13 @@
     line-height: 1.8;
   }
 
+  /* punkty dla pozycji w menu */
   .menu-text p::before { content: "• "; color: #222; }
   .menu-text .no-dot { color: #888; text-indent: 0; }
   .menu-text .no-dot::before { content: ""; }
 
   @media (max-width: 600px) {
-    .menu-item img { width: 70vw; margin-bottom: 15px; }
+    .menu-item img { width: 70vw; height: 70vw; margin-bottom: 15px; }
     .menu-text { width: 90%; font-size: 1em; }
     h2 { font-size: 1.2em; }
     p { font-size: 0.95em; line-height: 1.6; }
@@ -137,7 +149,7 @@
   </div>
 
   <div class="menu-item">
-    <img src="ziemniakipieczone.png" alt="Dodatki"> 
+    <img src="ziemniakipieczone.png" alt="Dodatki">
     <div class="menu-text">
       <h2>DODATKI</h2>
       <p>Ziemniaczki pieczone,</p>
@@ -201,7 +213,5 @@ handleScroll();
 
 </body>
 </html>
-
-
 
 
