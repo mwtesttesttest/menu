@@ -1,79 +1,79 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu Restauracji</title>
 
-  <!-- Nowoczesna czcionka -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
       font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
       color: #222;
       overflow-x: hidden;
-      background: url('TLO.jpg') center center / cover no-repeat fixed;
+      background: url('TLO.jpg') no-repeat center center fixed;
+      background-size: cover;
       scroll-behavior: smooth;
     }
 
     h1 {
       text-align: center;
-      padding: 25px;
+      padding: 20px;
       font-size: 1.8em;
-      color: #222;
+      font-weight: 500;
       letter-spacing: 0.5px;
-      font-weight: 600;
+      background: rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px;
     }
 
     .menu-container {
       width: 100%;
+      overflow: hidden;
     }
 
     .menu-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 85vh;
       position: relative;
-      overflow: hidden;
+      height: 80vh;
       transition: all 0.6s ease-out;
-    }
-
-    .menu-item.left {
-      flex-direction: row;
-    }
-
-    .menu-item.right {
-      flex-direction: row-reverse;
     }
 
     .menu-item img {
-      width: 50vw;
-      height: 50vw;
-      max-width: 360px;
-      max-height: 360px;
+      position: absolute;
+      top: 0;
+      width: 100vw;
+      height: 100%;
       object-fit: cover;
-      border-radius: 50%;
-      flex-shrink: 0;
-      transition: transform 0.8s ease-out;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.35);
+      transition: transform 0.6s ease-out;
+    }
+
+    .menu-item.left img {
+      left: -50vw;
+      clip-path: inset(0 50% 0 0);
+    }
+
+    .menu-item.right img {
+      right: -50vw;
+      clip-path: inset(0 0 0 50%);
     }
 
     .menu-text {
-      width: 45vw;
-      max-width: 420px;
+      position: absolute;
+      z-index: 2;
+      width: 45%;
       background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(5px);
-      padding: 25px 30px;
-      border-radius: 20px;
-      transition: all 0.6s ease-out;
+      padding: 20px;
+      border-radius: 15px;
+      transition: all 0.5s ease-out;
       opacity: 0;
       transform: translateY(30px);
     }
@@ -84,66 +84,47 @@
     }
 
     .menu-item.left .menu-text {
-      margin-left: 5vw;
+      right: 5%;
       text-align: left;
     }
 
     .menu-item.right .menu-text {
-      margin-right: 5vw;
+      left: 5%;
       text-align: right;
     }
 
-    .menu-item.visible img {
-      transform: scale(1.05);
-    }
-
-    h2 {
+    .menu-text h2 {
       font-size: 1.2em;
       font-weight: 600;
-      margin: 0 0 8px 0;
-      color: #111;
+      margin-bottom: 8px;
     }
 
-    p {
+    .menu-text p {
       font-size: 1em;
-      font-weight: 400;
-      margin: 3px 0;
       line-height: 1.5;
-      color: #333;
     }
 
     @media (max-width: 600px) {
       .menu-item {
-        flex-direction: column !important;
-        justify-content: center;
-        height: auto;
-        padding: 40px 0;
-      }
-
-      .menu-item img {
-        width: 70vw;
-        height: 70vw;
-        margin-bottom: 20px;
+        height: 70vh;
       }
 
       .menu-text {
-        width: 80%;
-        text-align: center !important;
-        margin: 0;
-        font-size: 1em;
+        width: 70%;
       }
 
-      h2 {
+      .menu-text h2 {
         font-size: 1.1em;
       }
 
-      p {
+      .menu-text p {
         font-size: 0.95em;
       }
     }
   </style>
 </head>
 <body>
+
   <h1>Menu Dnia</h1>
 
   <div class="menu-container">
@@ -253,6 +234,6 @@
     window.addEventListener('scroll', handleScroll);
     handleScroll();
   </script>
+
 </body>
 </html>
-
