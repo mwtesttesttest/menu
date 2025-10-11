@@ -51,14 +51,16 @@
       transition: transform 1s ease-out;
     }
 
+    /* zdjęcie po lewej stronie – widać tylko połowę */
     .menu-item.left img {
-      left: -50vw; /* widoczna połowa zdjęcia */
-      clip-path: inset(0 50% 0 0);
+      left: -40vw;
+      clip-path: inset(0 40% 0 0);
     }
 
+    /* zdjęcie po prawej stronie – widać tylko połowę */
     .menu-item.right img {
-      right: -50vw; /* widoczna połowa zdjęcia */
-      clip-path: inset(0 0 0 50%);
+      right: -40vw;
+      clip-path: inset(0 0 0 40%);
     }
 
     .menu-text {
@@ -150,15 +152,14 @@
     function handleScroll() {
       items.forEach(item => {
         const rect = item.getBoundingClientRect();
+        const img = item.querySelector('img');
 
-        // animacja tekstu i zdjęcia
+        // Efekt skalowania zdjęcia + pojawienie się tekstu
         if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
           item.classList.add('visible');
-          const img = item.querySelector('img');
           img.style.transform = 'scale(1.05)';
         } else {
           item.classList.remove('visible');
-          const img = item.querySelector('img');
           img.style.transform = 'scale(1)';
         }
       });
@@ -170,4 +171,3 @@
 
 </body>
 </html>
-
