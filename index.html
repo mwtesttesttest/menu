@@ -18,14 +18,9 @@
       background-size: cover;
     }
 
-    h1 {
-      text-align: center;
-      padding: 25px;
-      font-size: 1.8em;
-      color: #222;
-      letter-spacing: 0.5px;
-      font-weight: 600;
-      text-align: center;
+    .header-image {
+      width: 100%;
+      display: block;
     }
 
     .menu-container { width: 100%; }
@@ -85,39 +80,51 @@
     .menu-item.right .menu-text { margin-right: 5vw; }
 
     h2 {
-      font-size: 1.2em;
+      font-size: 1.4em;
       font-weight: 600;
       margin: 0 0 12px 0;
       color: #111;
       text-shadow: none;
-      text-align: justify;
+      text-align: center; /* wyśrodkowane */
     }
 
     p {
       font-size: 1em;
       font-weight: 400;
-      margin: 8px 0; /* większe interlinie między pozycjami */
+      margin: 6px 0;
       line-height: 1.8;
       color: #333;
       text-shadow: none;
     }
 
-    p::before {
-      content: "• "; /* elegancki punkt */
+    /* punkty dla pozycji w menu z przecinkami */
+    .menu-text p::before {
+      content: "• ";
       color: #222;
+    }
+
+    /* wyjątek dla ostatniego punktu w słodkościach i napojach */
+    .menu-text .no-dot {
+      color: #888;
+      text-indent: 0;
+    }
+    .menu-text .no-dot::before {
+      content: "";
     }
 
     @media (max-width: 600px) {
       .menu-item { flex-direction: column !important; justify-content: center; min-height: auto; padding: 40px 0; }
       .menu-item img { width: 70vw; height: 70vw; margin-bottom: 20px; }
       .menu-text { width: 80%; margin: 0; font-size: 1em; text-align: justify; }
-      h2 { font-size: 1.1em; }
+      h2 { font-size: 1.2em; }
       p { font-size: 0.95em; line-height: 1.6; }
     }
   </style>
 </head>
 <body>
-  <h1>Menu Dnia</h1> 
+
+  <!-- Nagłówek obrazkowy -->
+  <img src="napismenu.jpg" alt="Menu" class="header-image">
 
   <div class="menu-container">
 
@@ -125,7 +132,8 @@
       <img src="zupa.jpg" alt="Zupa serwowana">
       <div class="menu-text">
         <h2>ZUPA SERWOWANA</h2>
-        <p>Tradycyjny rosół drobiowy z makaronem domowym</p>
+        <p>Tradycyjny rosół drobiowy z makaronem domowym,</p>
+        <p>Krem pomidorowy z ziołowymi grzankami - dla wegetarian,</p>
       </div>
     </div>
 
@@ -133,10 +141,8 @@
       <img src="obiad.png" alt="Drugie danie serwowane">
       <div class="menu-text">
         <h2>DRUGIE DANIE SERWOWANE</h2>
-        <p>Filet z kurczaka faszerowany serem mozzarella</p>
-        <p>Sos pieczeniowy</p>
-        <p>Puree ziemniaczane z koperkiem</p>
-        <p>Surówka Coleslaw</p>
+        <p>Filet z kurczaka faszerowany serem mozzarella,</p>
+        <p>Papryka faszerowana ryżem i warzywami z sosem pomidorowym,</p>
       </div>
     </div>
 
@@ -144,8 +150,8 @@
       <img src="zupawbemarach.png" alt="Zupy w bufecie">
       <div class="menu-text">
         <h2>ZUPY W BUFECIE</h2>
-        <p>Żurek na wędzonym żeberku</p>
-        <p>Wegański barszczyk czerwony z pasztecikiem</p>
+        <p>Żurek na wędzonym żeberku,</p>
+        <p>Wegański barszczyk czerwony z pasztecikiem,</p>
       </div>
     </div>
 
@@ -153,9 +159,9 @@
       <img src="ciepleprzekaskiwbufecie.png" alt="Ciepłe przekąski w bufecie">
       <div class="menu-text">
         <h2>CIEPŁE PRZEKĄSKI W BUFECIE</h2>
-        <p>Makaron penne z kurczakiem w sosie serowym</p>
-        <p>Gyros drobiowy z sosem czosnkowym</p>
-        <p>Leczo warzywne z pieczarkami</p>
+        <p>Makaron penne z kurczakiem w sosie serowym,</p>
+        <p>Gyros drobiowy z sosem czosnkowym,</p>
+        <p>Leczo warzywne z pieczarkami,</p>
       </div>
     </div>
 
@@ -163,9 +169,9 @@
       <img src="ziemniakipieczone.png" alt="Dodatki"> 
       <div class="menu-text">
         <h2>DODATKI</h2>
-        <p>Ziemniaczki pieczone</p>
-        <p>Ryż z warzywami</p>
-        <p>Zestaw świeżych surówek Szefa Kuchni</p>
+        <p>Ziemniaczki pieczone,</p>
+        <p>Ryż z warzywami,</p>
+        <p>Zestaw świeżych surówek Szefa Kuchni,</p>
       </div>
     </div>
 
@@ -173,16 +179,16 @@
       <img src="polmisekmies.png" alt="Przekąski zimne">
       <div class="menu-text">
         <h2>PRZEKĄSKI ZIMNE</h2>
-        <p>Półmisek mięs pieczonych</p>
-        <p>Kęski z kurczaka w panko z sosem słodko-kwaśnym</p>
-        <p>Kabanosy w cieście francuskim</p>
-        <p>Aksamitny szpinakowy biszkopt z wędzonym łososiem i ziołowym serkiem</p>
-        <p>Tortilla z grillowanym kurczakiem i warzywami</p>
-        <p>Humus ze świeżymi warzywami</p>
-        <p>Quesadillas z kurczakiem, chorizo, serem żółtym, pomidorami i ostrym sosem wasabi</p>
-        <p>Tradycyjna sałatka grecka</p>
-        <p>Sałatka z burakiem i fetą</p>
-        <p>Grillowane warzywa z sezamem i marynowanym tofu – wegańskie</p>
+        <p>Półmisek mięs pieczonych,</p>
+        <p>Kęski z kurczaka w panko z sosem słodko-kwaśnym,</p>
+        <p>Kabanosy w cieście francuskim,</p>
+        <p>Aksamitny szpinakowy biszkopt z wędzonym łososiem i ziołowym serkiem,</p>
+        <p>Tortilla z grillowanym kurczakiem i warzywami,</p>
+        <p>Humus ze świeżymi warzywami,</p>
+        <p>Quesadillas z kurczakiem, chorizo, serem żółtym, pomidorami i ostrym sosem wasabi,</p>
+        <p>Tradycyjna sałatka grecka,</p>
+        <p>Sałatka z burakiem i fetą,</p>
+        <p>Grillowane warzywa z sezamem i marynowanym tofu – wegańskie,</p>
       </div>
     </div>
 
@@ -190,17 +196,17 @@
       <img src="slodkosci.png" alt="Słodkości i napoje">
       <div class="menu-text">
         <h2>SŁODKOŚCI I NAPOJE</h2>
-        <p>Ręcznie robione ciasta</p>
-        <p>Słodkie muffinki</p>
-        <p>Delikatne babeczki</p>
-        <p>Świeże owoce</p>
-        <p>Aksamitna kawa*</p>
-        <p>Wyrazista herbata czarna, owocowa</p>
-        <p>Woda mineralna</p>
-        <p>Coca-Cola</p>
-        <p>Mirinda</p>
-        <p>Sok pomarańczowy</p>
-        <p>*możliwe mleko krowie lub mleko roślinne</p>
+        <p>Ręcznie robione ciasta,</p>
+        <p>Słodkie muffinki,</p>
+        <p>Delikatne babeczki,</p>
+        <p>Świeże owoce,</p>
+        <p>Aksamitna kawa*,</p>
+        <p>Wyrazista herbata czarna, owocowa,</p>
+        <p>Woda mineralna,</p>
+        <p>Coca-Cola,</p>
+        <p>Mirinda,</p>
+        <p>Sok pomarańczowy,</p>
+        <p class="no-dot">*możliwe mleko krowie lub mleko roślinne</p>
       </div>
     </div>
 
