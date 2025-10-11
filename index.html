@@ -16,7 +16,6 @@
     overflow-x: hidden;
   }
 
-  /* kontener paralaksy - tło przewija się wraz ze scrollowaniem */
   .parallax {
     position: fixed;
     top: 0;
@@ -47,7 +46,7 @@
 
   .menu-item {
     display: flex;
-    flex-direction: column; /* tekst pod zdjęciem */
+    flex-direction: column;
     align-items: center;
     position: relative;
     overflow: hidden;
@@ -59,7 +58,6 @@
 
   .menu-item.visible { opacity: 1; transform: translateY(0); }
 
-  /* zdjęcia w kole */
   .menu-item img {
     width: 50vw;
     max-width: 360px;
@@ -83,7 +81,6 @@
     padding: 20px 25px;
     border-radius: 20px;
     text-align: justify;
-    transition: all 0.5s ease;
   }
 
   h2 {
@@ -93,15 +90,20 @@
     text-align: center;
   }
 
-  /* półprzezroczyste tło dla akapitów */
+  /* półprzezroczyste prostokąty dla akapitów z animacją */
   .menu-text p {
     font-size: 1em;
-    margin: 5px 0;
+    margin: 8px 0;
     line-height: 1.8;
     background: rgba(255,255,255,0.5);
     padding: 8px 12px;
     border-radius: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
   }
+
+  .menu-text p.visible { opacity: 1; transform: translateY(0); }
 
   .menu-text p::before { content: "• "; color: #222; }
   .menu-text .no-dot { color: #888; text-indent: 0; }
@@ -209,15 +211,25 @@
 </div>
 
 <script>
-  // animacja fade-in przy scrollu
+  // animacja fade-in dla sekcji i akapitów
   const items = document.querySelectorAll('.menu-item');
   function handleScroll() {
     items.forEach(item => {
       const rect = item.getBoundingClientRect();
       if(rect.top < window.innerHeight * 0.8 && rect.bottom > 0){
         item.classList.add('visible');
+
+        // animacja akapitów w danej sekcji
+        const paragraphs = item.querySelectorAll('p');
+        paragraphs.forEach((p, i) => {
+          setTimeout(() => {
+            p.classList.add('visible');
+          }, i * 100); // kolejne akapity pojawiają się co 100ms
+        });
+
       } else {
         item.classList.remove('visible');
+        item.querySelectorAll('p').forEach(p => p.classList.remove('visible'));
       }
     });
   }
@@ -228,7 +240,7 @@
   const parallax = document.querySelector('.parallax');
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
-    parallax.style.transform = `translateY(${scrollY * 0.05}px)`;
+    parallax.style.transform = `translateY(${scrollY * 0.1}px)`;
   });
 </script>
 
