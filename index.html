@@ -18,7 +18,7 @@
 
   .parallax {
     position: fixed;
-    top: 120px; /* tło zaczyna się od dolnego brzegu obrazka nagłówka */
+    top: 120px; /* tło zaczyna się od dolnego brzegu nagłówka */
     left: 0;
     width: 100%;
     height: calc(100% - 120px);
@@ -71,8 +71,7 @@
   }
 
   .menu-container {
-    padding-top: 140px; /* odstęp od górnego menu do tła */
-    padding-bottom: 20px;
+    padding: 20px 0; /* zachowane oryginalne paddingi, żeby menu nie przesuwało się niżej */
     position: relative;
     z-index: 1;
   }
@@ -171,7 +170,6 @@
     h2 { font-size: 1.2em; }
     p { font-size: 0.95em; line-height: 1.4; }
     .header-image { max-height: 100px; }
-    .menu-container { padding-top: 120px; }
     .allergen-warning { width: 95%; font-size: 0.95em; }
   }
 </style>
@@ -187,7 +185,7 @@
 </div>
 
 <div class="parallax"></div>
- 
+
 <div class="menu-container">
 
   <!-- Zupy -->
@@ -407,4 +405,5 @@
 
 </body>
 </html>
+
 
