@@ -42,6 +42,7 @@
     display: block;
     z-index: 2;
     position: relative;
+    cursor: pointer;
   }
 
   .flags-container {
@@ -97,7 +98,6 @@
     box-shadow: 0 15px 35px rgba(0,0,0,0.45);
   }
 
-  /* prostokąty dla pojedynczych potraw */
   .menu-text {
     width: 80%;
     max-width: 500px;
@@ -109,13 +109,11 @@
     transition: all 0.8s ease-out;
   }
 
-  /* sekcje z wieloma potrawami w jednym prostokącie */
   .menu-text.full {
     padding: 20px 25px;
     margin-bottom: 20px;
   }
 
-  /* odstęp między nazwą sekcji a pierwszą potrawą w prostokącie */
   .menu-text h2 {
     margin-bottom: 15px;
   }
@@ -133,7 +131,6 @@
     line-height: 1.6;
   }
 
-  /* interlinie 1.9 dla ostatnich sekcji */
   .menu-text.full p {
     line-height: 1.9;
   }
@@ -155,10 +152,10 @@
 <body>
 
 <div class="header-container">
-  <img src="napismenu.jpg" alt="Menu" class="header-image">
+  <img src="napismenu.jpg" alt="Menu" class="header-image" id="header-image">
   <div class="flags-container">
-    <img src="flag_uk.png" alt="English" id="flag-en">
-    <img src="flag_ua.png" alt="Ukrainian" id="flag-ua">
+    <img src="flagaukrainy.png" alt="English" id="flag-en">
+    <img src="flagaangli.png" alt="Ukrainian" id="flag-ua">
   </div>
 </div>
 
@@ -261,7 +258,7 @@
   window.addEventListener('scroll', handleScroll);
   handleScroll();
 
-  // paralaksa tła - delikatny ruch
+  // paralaksa tła
   const parallax = document.querySelector('.parallax');
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
@@ -356,18 +353,18 @@
     }
   };
 
-  function translatePage(lang) {
-    document.querySelectorAll('.menu-text h2, .menu-text p').forEach(el => {
+  function translatePage(lang){
+    document.querySelectorAll('.menu-text h2, .menu-text p').forEach(el=>{
       if(translations[lang][el.textContent]){
         el.textContent = translations[lang][el.textContent];
       }
     });
   }
 
-  document.getElementById('flag-en').onclick = () => translatePage('en');
-  document.getElementById('flag-ua').onclick = () => translatePage('ua');
+  document.getElementById('flag-en').onclick = ()=>translatePage('en');
+  document.getElementById('flag-ua').onclick = ()=>translatePage('ua');
+  document.getElementById('header-image').onclick = ()=>translatePage('pl');
 </script>
 
 </body>
 </html>
-
