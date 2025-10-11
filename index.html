@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menu Restauracji</title>
 
-  <!-- Nowoczesna czcionka Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Nowoczesna czcionka -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     * {
@@ -25,11 +25,11 @@
 
     h1 {
       text-align: center;
-      padding: 20px;
-      font-size: 1.6em;
+      padding: 25px;
+      font-size: 1.8em;
       color: #222;
       letter-spacing: 0.5px;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .menu-container {
@@ -40,51 +40,42 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 90vh;
+      height: 85vh;
       position: relative;
       overflow: hidden;
       transition: all 0.6s ease-out;
     }
 
-    /* okrągłe zdjęcia potraw */
+    .menu-item.left {
+      flex-direction: row;
+    }
+
+    .menu-item.right {
+      flex-direction: row-reverse;
+    }
+
     .menu-item img {
-      width: 70vw;
-      height: 70vw;
-      max-width: 320px;
-      max-height: 320px;
+      width: 50vw;
+      height: 50vw;
+      max-width: 360px;
+      max-height: 360px;
       object-fit: cover;
       border-radius: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 1;
-      transition: transform 1s ease-out;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-    }
-
-    /* zdjęcie po lewej – przesunięte w połowie poza ekran */
-    .menu-item.left img {
-      left: -35vw;
-    }
-
-    /* zdjęcie po prawej – przesunięte w połowie poza ekran */
-    .menu-item.right img {
-      right: -35vw;
+      flex-shrink: 0;
+      transition: transform 0.8s ease-out;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.35);
     }
 
     .menu-text {
-      position: relative;
-      z-index: 2;
+      width: 45vw;
+      max-width: 420px;
       background: rgba(255, 255, 255, 0.85);
-      padding: 20px;
+      backdrop-filter: blur(5px);
+      padding: 25px 30px;
       border-radius: 20px;
-      font-size: 1em;
-      line-height: 1.5;
+      transition: all 0.6s ease-out;
       opacity: 0;
       transform: translateY(30px);
-      transition: all 0.6s ease-out;
-      width: 70%;
-      max-width: 280px;
     }
 
     .menu-item.visible .menu-text {
@@ -92,72 +83,154 @@
       transform: translateY(0);
     }
 
-    /* tekst wyrównany do krawędzi zdjęcia */
     .menu-item.left .menu-text {
-      margin-left: auto;
-      margin-right: calc(35vw + 10px);
-      text-align: right;
+      margin-left: 5vw;
+      text-align: left;
     }
 
     .menu-item.right .menu-text {
-      margin-left: calc(35vw + 10px);
-      text-align: left;
+      margin-right: 5vw;
+      text-align: right;
+    }
+
+    .menu-item.visible img {
+      transform: scale(1.05);
+    }
+
+    h2 {
+      font-size: 1.2em;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+      color: #111;
+    }
+
+    p {
+      font-size: 1em;
+      font-weight: 400;
+      margin: 3px 0;
+      line-height: 1.5;
+      color: #333;
     }
 
     @media (max-width: 600px) {
       .menu-item {
-        height: 80vh;
-      }
-
-      .menu-text {
-        font-size: 1em;
-        width: 75%;
-      }
-
-      .menu-item.left .menu-text {
-        margin-right: calc(30vw + 8px);
-      }
-
-      .menu-item.right .menu-text {
-        margin-left: calc(30vw + 8px);
+        flex-direction: column !important;
+        justify-content: center;
+        height: auto;
+        padding: 40px 0;
       }
 
       .menu-item img {
-        width: 65vw;
-        height: 65vw;
-        max-width: none;
-        max-height: none;
+        width: 70vw;
+        height: 70vw;
+        margin-bottom: 20px;
+      }
+
+      .menu-text {
+        width: 80%;
+        text-align: center !important;
+        margin: 0;
+        font-size: 1em;
+      }
+
+      h2 {
+        font-size: 1.1em;
+      }
+
+      p {
+        font-size: 0.95em;
       }
     }
   </style>
 </head>
 <body>
-
   <h1>Menu Dnia</h1>
 
   <div class="menu-container">
 
+    <!-- ZUPA SERWOWANA -->
     <div class="menu-item left">
-      <img src="zupa.jpg" alt="Tradycyjny rosół drobiowy z makaronem domowym">
+      <img src="zupa.jpg" alt="Zupa serwowana">
       <div class="menu-text">
-        <h2>Tradycyjny rosół drobiowy</h2>
-        <p>z makaronem drobiowym</p>
+        <h2>ZUPA SERWOWANA</h2>
+        <p>Tradycyjny rosół drobiowy z makaronem domowym</p>
       </div>
     </div>
 
+    <!-- DRUGIE DANIE SERWOWANE -->
     <div class="menu-item right">
-      <img src="obiad.png" alt="Filet z kurczaka faszerowany serem mozzarella">
+      <img src="obiad.png" alt="Drugie danie serwowane">
       <div class="menu-text">
-        <h2>Filet z kurczaka</h2>
-        <p>faszerowany serem mozzarella, z sosem pieczeniowym, puree ziemniaczanym z koperkiem i surówką Coleslaw</p>
+        <h2>DRUGIE DANIE SERWOWANE</h2>
+        <p>Filet z kurczaka faszerowany serem mozzarella z sosem pieczeniowym na puree ziemniaczanym z koperkiem z surówką Coleslaw</p>
       </div>
     </div>
 
+    <!-- ZUPY W BUFECIE -->
     <div class="menu-item left">
-      <img src="makaronpenne.png" alt="Makaron penne z kurczakiem w sosie serowym">
+      <img src="makaronpenne.png" alt="Zupy w bufecie">
       <div class="menu-text">
-        <h2>Makaron Penne</h2>
-        <p>z kurczakiem w sosie serowym</p>
+        <h2>ZUPY W BUFECIE</h2>
+        <p>Żurek na wędzonym żeberku</p>
+        <p>Wegański barszczyk czerwony z pasztecikiem</p>
+      </div>
+    </div>
+
+    <!-- CIEPŁE PRZEKĄSKI W BUFECIE -->
+    <div class="menu-item right">
+      <img src="ciepleprzekaskiwbufecie.png" alt="Ciepłe przekąski w bufecie">
+      <div class="menu-text">
+        <h2>CIEPŁE PRZEKĄSKI W BUFECIE</h2>
+        <p>Makaron penne z kurczakiem w sosie serowym</p>
+        <p>Gyros drobiowy z sosem czosnkowym</p>
+        <p>Leczo warzywne z pieczarkami</p>
+      </div>
+    </div>
+
+    <!-- DODATKI -->
+    <div class="menu-item left">
+      <img src="ziemniakipieczone.png" alt="Dodatki">
+      <div class="menu-text">
+        <h2>DODATKI</h2>
+        <p>Ziemniaczki pieczone</p>
+        <p>Ryż z warzywami</p>
+        <p>Zestaw świeżych surówek Szefa Kuchni</p>
+      </div>
+    </div>
+
+    <!-- PRZEKĄSKI ZIMNE -->
+    <div class="menu-item right">
+      <img src="półmisekmięs.png" alt="Przekąski zimne">
+      <div class="menu-text">
+        <h2>PRZEKĄSKI ZIMNE</h2>
+        <p>Półmisek mięs pieczonych</p>
+        <p>Kęski z kurczaka w panko z sosem słodko-kwaśnym</p>
+        <p>Kabanosy w cieście francuskim</p>
+        <p>Aksamitny szpinakowy biszkopt z wędzonym łososiem i ziołowym serkiem</p>
+        <p>Tortilla z grillowanym kurczakiem i warzywami</p>
+        <p>Humus ze świeżymi warzywami</p>
+        <p>Quesadillas z kurczakiem, chorizo, serem żółtym, pomidorami i ostrym sosem wasabi</p>
+        <p>Tradycyjna sałatka grecka</p>
+        <p>Sałatka z burakiem i fetą</p>
+        <p>Grillowane warzywa z sezamem i marynowanym tofu – wegańskie</p>
+      </div>
+    </div>
+
+    <!-- SŁODKOŚCI I NAPOJE -->
+    <div class="menu-item left">
+      <img src="słodkości.png" alt="Słodkości i napoje">
+      <div class="menu-text">
+        <h2>SŁODKOŚCI I NAPOJE</h2>
+        <p>Ręcznie robione ciasta</p>
+        <p>Słodkie muffinki</p>
+        <p>Delikatne babeczki</p>
+        <p>Świeże owoce</p>
+        <p>Aksamitna kawa*</p>
+        <p>Wyrazista herbata czarna, owocowa</p>
+        <p>Woda mineralna</p>
+        <p>Coca-Cola</p>
+        <p>Mirinda</p>
+        <p>Sok pomarańczowy</p>
       </div>
     </div>
 
@@ -169,15 +242,10 @@
     function handleScroll() {
       items.forEach(item => {
         const rect = item.getBoundingClientRect();
-        const img = item.querySelector('img');
-
-        // animacja przy przewijaniu
         if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
           item.classList.add('visible');
-          img.style.transform = 'translateY(-50%) scale(1.05)';
         } else {
           item.classList.remove('visible');
-          img.style.transform = 'translateY(-50%) scale(1)';
         }
       });
     }
@@ -185,8 +253,6 @@
     window.addEventListener('scroll', handleScroll);
     handleScroll();
   </script>
-
 </body>
 </html>
-
 
