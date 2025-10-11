@@ -16,18 +16,23 @@
     overflow-x: hidden;
   }
 
-  /* paralaksa - tło zaczyna się pod nagłówkiem */
   .parallax {
     position: fixed;
-    top: 120px; /* start pod dolnym brzegiem napisu menu */
+    top: 0;
     left: 0;
     width: 100%;
-    height: calc(100% - 120px);
+    height: 100%;
     background: url('TLO.jpg') top center no-repeat;
     background-size: cover;
     z-index: -1;
     transform: translateY(0);
     transition: transform 0.1s linear;
+  }
+
+  .header-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
   }
 
   .header-image {
@@ -37,6 +42,21 @@
     display: block;
     z-index: 2;
     position: relative;
+  }
+
+  .flags-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 3;
+  }
+
+  .flags-container img {
+    width: 30px;
+    cursor: pointer;
   }
 
   .menu-container {
@@ -95,6 +115,7 @@
     margin-bottom: 20px;
   }
 
+  /* odstęp między nazwą sekcji a pierwszą potrawą w prostokącie */
   .menu-text h2 {
     margin-bottom: 15px;
   }
@@ -108,8 +129,13 @@
 
   p {
     font-size: 1em;
-    margin: 4px 0;
-    line-height: 1.2;
+    margin: 4px 0; 
+    line-height: 1.6;
+  }
+
+  /* interlinie 1.9 dla ostatnich sekcji */
+  .menu-text.full p {
+    line-height: 1.9;
   }
 
   .menu-text p::before { content: "• "; color: #222; }
@@ -123,15 +149,20 @@
     h2 { font-size: 1.2em; }
     p { font-size: 0.95em; line-height: 1.4; }
     .header-image { max-height: 100px; }
-    .parallax { top: 100px; height: calc(100% - 100px); }
   }
 </style>
 </head>
 <body>
 
-<div class="parallax"></div>
+<div class="header-container">
+  <img src="napismenu.jpg" alt="Menu" class="header-image">
+  <div class="flags-container">
+    <img src="flag_uk.png" alt="English" id="flag-en">
+    <img src="flag_ua.png" alt="Ukrainian" id="flag-ua">
+  </div>
+</div>
 
-<img src="napismenu.jpg" alt="Menu" class="header-image">
+<div class="parallax"></div>
 
 <div class="menu-container">
 
@@ -215,6 +246,7 @@
 </div>
 
 <script>
+  // animacja fade-in przy scrollu
   const items = document.querySelectorAll('.menu-item');
   function handleScroll() {
     items.forEach(item => {
@@ -229,14 +261,113 @@
   window.addEventListener('scroll', handleScroll);
   handleScroll();
 
+  // paralaksa tła - delikatny ruch
   const parallax = document.querySelector('.parallax');
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
     parallax.style.transform = `translateY(${scrollY * 0.1}px)`;
   });
+
+  // tłumaczenia
+  const translations = {
+    en: {
+      "ZUPA SERWOWANA":"SOUP SERVED",
+      "Tradycyjny rosół drobiowy z domowym makaronem,":"Traditional chicken broth with homemade noodles,",
+      "Aksamitny krem pomidorowy z ziołowymi grzankami - dla wegetarian":"Velvety tomato cream with herb croutons - vegetarian",
+      "DRUGIE DANIE SERWOWANE":"MAIN COURSE SERVED",
+      "Filet z kurczaka faszerowany serem mozzarella z sosem pieczeniowym na puree z koperkiem z surówką Coleslaw,":"Chicken fillet stuffed with mozzarella and gravy on mashed potatoes with coleslaw,",
+      "Pieczona papryka faszerowana ryżem i warzywami z sosem pomidorowym - dla wegetarian":"Baked pepper stuffed with rice and vegetables with tomato sauce - vegetarian",
+      "ZUPY W BUFECIE":"BUFFET SOUPS",
+      "Żurek na wędzonym żeberku,":"Sour rye soup with smoked ribs,",
+      "Wegański barszczyk czerwony z pasztecikiem":"Vegan red borscht with pastry",
+      "CIEPŁE PRZEKĄSKI W BUFECIE":"HOT APPETIZERS",
+      "Makaron penne z kurczakiem w sosie serowym,":"Penne pasta with chicken in cheese sauce,",
+      "Gyros drobiowy z sosem czosnkowym,":"Chicken gyros with garlic sauce,",
+      "Wegetariańskie leczo warzywne z pieczarkami":"Vegetarian vegetable leczo with mushrooms",
+      "DODATKI":"SIDES",
+      "Ziemniaczki pieczone,":"Roasted potatoes,",
+      "Ryż biały z warzywami,":"White rice with vegetables,",
+      "Zestaw świeżych surówek Szefa Kuchni":"Chef's fresh salad set",
+      "PRZEKĄSKI ZIMNE":"COLD APPETIZERS",
+      "Półmisek mięs pieczonych,":"Plate of roasted meats,",
+      "Kęski z kurczaka w panko z sosem słodko-kwaśnym,":"Chicken bites in panko with sweet and sour sauce,",
+      "Kabanosy w cieście francuskim,":"Kabanos in puff pastry,",
+      "Aksamitny szpinakowy biszkopt z wędzonym łososiem i ziołowym serkiem,":"Velvety spinach biscuit with smoked salmon and herb cheese,",
+      "Tortilla z grillowanym kurczakiem i warzywami,":"Tortilla with grilled chicken and vegetables,",
+      "Humus ze świeżymi warzywami,":"Hummus with fresh vegetables,",
+      "Quesadillas z kurczakiem, chorizo, serem żółtym, pomidorami i ostrym sosem wasabi,":"Quesadillas with chicken, chorizo, yellow cheese, tomatoes and spicy wasabi sauce,",
+      "Tradycyjna sałatka grecka,":"Traditional Greek salad,",
+      "Sałatka z burakiem i fetą,":"Beet and feta salad,",
+      "Grillowane warzywa z sezamem i marynowanym tofu – wegańskie":"Grilled vegetables with sesame and marinated tofu - vegan",
+      "SŁODKOŚCI I NAPOJE":"SWEETS AND DRINKS",
+      "Ręcznie robione ciasta,":"Handmade cakes,",
+      "Słodkie muffinki,":"Sweet muffins,",
+      "Delikatne babeczki,":"Delicate cupcakes,",
+      "Świeże owoce,":"Fresh fruits,",
+      "Aksamitna kawa*,":"Velvety coffee*,",
+      "Wyrazista herbata czarna lub owocowa,":"Strong black or fruit tea,",
+      "Woda mineralna niegazowana,":"Still mineral water,",
+      "Coca-Cola,":"Coca-Cola,",
+      "Mirinda,":"Mirinda,",
+      "Sok pomarańczowy,":"Orange juice,",
+      "*możliwe mleko krowie lub roślinne":"*milk options: cow or plant-based"
+    },
+    ua: {
+      "ZUPA SERWOWANA":"СУП ПОДАЮТЬ",
+      "Tradycyjny rosół drobiowy z domowym makaronem,":"Традиційний курячий бульйон з домашньою локшиною,",
+      "Aksamitny krem pomidorowy z ziołowymi grzankami - dla wegetarian":"Ніжний томатний крем з трав’яними грінками - для вегетаріанців",
+      "DRUGIE DANIE SERWOWANE":"ГОЛОВНА СТРАВА",
+      "Filet z kurczaka faszerowany serem mozzarella z sosem pieczeniowym na puree z koperkiem z surówką Coleslaw,":"Філе курки, фаршироване моцарелою, з підливкою на пюре з кропом та салатом Колеслоу,",
+      "Pieczona papryka faszerowana ryżem i warzywami z sosem pomidorowym - dla wegetarian":"Запечений перець, фарширований рисом і овочами з томатним соусом - для вегетаріанців",
+      "ZUPY W BUFECIE":"СУПИ В БУФЕТІ",
+      "Żurek na wędzonym żeberku,":"Журек на копчених ребрах,",
+      "Wegański barszczyk czerwony z pasztecikiem":"Веганський червоний борщ з пиріжком",
+      "CIEPŁE PRZEKĄSKI W BUFECIE":"ГАРЯЧІ ЗАКУСКИ",
+      "Makaron penne z kurczakiem w sosie serowym,":"Паста пенне з куркою у сирному соусі,",
+      "Gyros drobiowy z sosem czosnkowym,":"Курячий гірос з часниковим соусом,",
+      "Wegetariańskie leczo warzywne z pieczarkami":"Вегетаріанське рагу з овочів з печерицями",
+      "DODATKI":"ДОДАТКИ",
+      "Ziemniaczki pieczone,":"Запечена картопля,",
+      "Ryż biały z warzywami,":"Білий рис з овочами,",
+      "Zestaw świeżych surówek Szefa Kuchni":"Набір свіжих салатів шеф-кухаря",
+      "PRZEKĄSKI ZIMNE":"ХОЛОДНІ ЗАКУСКИ",
+      "Półmisek mięs pieczonych,":"Блюдо запеченого м’яса,",
+      "Kęski z kurczaka w panko z sosem słodko-kwaśnym,":"Кусочки курки в панко з кисло-солодким соусом,",
+      "Kabanosy w cieście francuskim,":"Кабаноси в листковому тісті,",
+      "Aksamitny szpinakowy biszkopt z wędzonym łososiem i ziołowym serkiem,":"Ніжний шпинатний бісквіт з копченим лососем та трав’яним сиром,",
+      "Tortilla z grillowanym kurczakiem i warzywami,":"Тортілья з куркою на грилі та овочами,",
+      "Humus ze świeżymi warzywami,":"Хумус зі свіжими овочами,",
+      "Quesadillas z kurczakiem, chorizo, serem żółtym, pomidorami i ostrym sosem wasabi,":"Кесаділья з куркою, чорізо, твердим сиром, помідорами та гострим соусом васабі,",
+      "Tradycyjna sałatka grecka,":"Традиційний грецький салат,",
+      "Sałatka z burakiem i fetą,":"Салат з буряком та фетою,",
+      "Grillowane warzywa z sezamem i marynowanym tofu – wegańskie":"Овочі на грилі з кунжутом та маринованим тофу – веганські",
+      "SŁODKOŚCI I NAPOJE":"СОЛОДОЩІ ТА НАПОЇ",
+      "Ręcznie robione ciasta,":"Ручної роботи тістечка,",
+      "Słodkie muffinki,":"Солодкі мафіни,",
+      "Delikatne babeczki,":"Ніжні кекси,",
+      "Świeże owoce,":"Свіжі фрукти,",
+      "Aksamitna kawa*,":"Ніжна кава*,",
+      "Wyrazista herbata czarna lub owocowa,":"Насичений чорний або фруктовий чай,",
+      "Woda mineralna niegazowana,":"Мінеральна вода без газу,",
+      "Coca-Cola,":"Кока-Кола,",
+      "Mirinda,":"Мірінда,",
+      "Sok pomarańczowy,":"Апельсиновий сік,",
+      "*możliwe mleko krowie lub roślinne":"*можливе коров’яче або рослинне молоко"
+    }
+  };
+
+  function translatePage(lang) {
+    document.querySelectorAll('.menu-text h2, .menu-text p').forEach(el => {
+      if(translations[lang][el.textContent]){
+        el.textContent = translations[lang][el.textContent];
+      }
+    });
+  }
+
+  document.getElementById('flag-en').onclick = () => translatePage('en');
+  document.getElementById('flag-ua').onclick = () => translatePage('ua');
 </script>
 
 </body>
 </html>
-
 
