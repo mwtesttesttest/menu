@@ -52,7 +52,7 @@
     overflow: hidden;
     opacity: 0;
     transform: translateY(50px);
-    padding: 40px 0;
+    padding: 30px 0;
     transition: all 1s ease-out;
     width: 100%;
   }
@@ -66,7 +66,7 @@
     max-height: 360px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     transition: transform 0.8s ease-out, box-shadow 0.5s ease;
     box-shadow: 0 5px 25px rgba(0,0,0,0.35);
   }
@@ -76,34 +76,40 @@
     box-shadow: 0 15px 35px rgba(0,0,0,0.45);
   }
 
-  /* pojedynczy prostokąt dla każdej potrawy */
+  /* prostokąty dla pojedynczych potraw */
   .menu-text {
     width: 80%;
     max-width: 500px;
-    background: rgba(255,255,255,0.5);
-    padding: 15px 20px;
+    background: rgba(255,255,255,0.75);
+    padding: 10px 15px;
     border-radius: 15px;
     text-align: justify;
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* mniejsze odstępy między prostokątami */
     transition: all 0.8s ease-out;
   }
 
-  /* dla sekcji ze wszystkimi potrawami razem */
+  /* sekcje z wieloma potrawami w jednym prostokącie */
   .menu-text.full {
     padding: 20px 25px;
+    margin-bottom: 20px;
+  }
+
+  /* odstęp między nazwą sekcji a pierwszą potrawą w prostokącie */
+  .menu-text h2 {
+    margin-bottom: 15px;
   }
 
   h2 {
     font-size: 1.4em;
     font-weight: 600;
-    margin: 0 0 10px 0;
+    margin: 0;
     text-align: center;
   }
 
   p {
     font-size: 1em;
-    margin: 5px 0;
-    line-height: 1.8;
+    margin: 4px 0; /* mniejsze interlinie między potrawami */
+    line-height: 1.6;
   }
 
   .menu-text p::before { content: "• "; color: #222; }
@@ -115,7 +121,7 @@
     .menu-text { width: 90%; font-size: 1em; }
     .menu-text.full { width: 90%; }
     h2 { font-size: 1.2em; }
-    p { font-size: 0.95em; line-height: 1.6; }
+    p { font-size: 0.95em; line-height: 1.4; }
     .header-image { max-height: 100px; }
   }
 </style>
@@ -160,12 +166,15 @@
   <!-- Dodatki -->
   <div class="menu-item">
     <img src="ziemniakipieczone.png" alt="Dodatki">
-    <div class="menu-text"><h2>DODATKI</h2><p>Ziemniaczki pieczone,</p></div>
-    <div class="menu-text"><p>Ryż biały z warzywami,</p></div>
-    <div class="menu-text"><p>Zestaw świeżych surówek Szefa Kuchni</p></div>
+    <div class="menu-text full">
+      <h2>DODATKI</h2>
+      <p>Ziemniaczki pieczone,</p>
+      <p>Ryż biały z warzywami,</p>
+      <p>Zestaw świeżych surówek Szefa Kuchni</p>
+    </div>
   </div>
 
-  <!-- Przekąski zimne (jeden prostokąt) -->
+  <!-- Przekąski zimne -->
   <div class="menu-item">
     <img src="polmisekmies.png" alt="Przekąski zimne">
     <div class="menu-text full">
@@ -183,7 +192,7 @@
     </div>
   </div>
 
-  <!-- Słodkości i napoje (jeden prostokąt) -->
+  <!-- Słodkości i napoje -->
   <div class="menu-item">
     <img src="slodkosci.png" alt="Słodkości i napoje">
     <div class="menu-text full">
@@ -205,7 +214,6 @@
 </div>
 
 <script>
-  // animacja fade-in przy scrollu
   const items = document.querySelectorAll('.menu-item');
   function handleScroll() {
     items.forEach(item => {
@@ -220,7 +228,6 @@
   window.addEventListener('scroll', handleScroll);
   handleScroll();
 
-  // paralaksa tła
   const parallax = document.querySelector('.parallax');
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
@@ -230,6 +237,3 @@
 
 </body>
 </html>
-
-
-
