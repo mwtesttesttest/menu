@@ -54,6 +54,7 @@
     transform: translateY(50px);
     padding: 40px 0;
     transition: all 1s ease-out;
+    width: 100%;
   }
 
   .menu-item.visible { opacity: 1; transform: translateY(0); }
@@ -75,13 +76,18 @@
     box-shadow: 0 15px 35px rgba(0,0,0,0.45);
   }
 
+  /* wspólny prostokąt dla całej sekcji */
   .menu-text {
     width: 80%;
-    max-width: 420px;
+    max-width: 500px;
+    background: rgba(255,255,255,0.5);
     padding: 20px 25px;
     border-radius: 20px;
     text-align: justify;
+    transition: all 0.8s ease-out;
   }
+
+  .menu-text.visible { opacity: 1; transform: translateY(0); }
 
   h2 {
     font-size: 1.4em;
@@ -90,20 +96,11 @@
     text-align: center;
   }
 
-  /* półprzezroczyste prostokąty dla akapitów z animacją */
-  .menu-text p {
+  p {
     font-size: 1em;
-    margin: 8px 0;
+    margin: 5px 0;
     line-height: 1.8;
-    background: rgba(255,255,255,0.5);
-    padding: 8px 12px;
-    border-radius: 10px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease-out;
   }
-
-  .menu-text p.visible { opacity: 1; transform: translateY(0); }
 
   .menu-text p::before { content: "• "; color: #222; }
   .menu-text .no-dot { color: #888; text-indent: 0; }
@@ -211,25 +208,17 @@
 </div>
 
 <script>
-  // animacja fade-in dla sekcji i akapitów
+  // animacja fade-in przy scrollu
   const items = document.querySelectorAll('.menu-item');
   function handleScroll() {
     items.forEach(item => {
       const rect = item.getBoundingClientRect();
       if(rect.top < window.innerHeight * 0.8 && rect.bottom > 0){
         item.classList.add('visible');
-
-        // animacja akapitów w danej sekcji
-        const paragraphs = item.querySelectorAll('p');
-        paragraphs.forEach((p, i) => {
-          setTimeout(() => {
-            p.classList.add('visible');
-          }, i * 100); // kolejne akapity pojawiają się co 100ms
-        });
-
+        item.querySelector('.menu-text').classList.add('visible');
       } else {
         item.classList.remove('visible');
-        item.querySelectorAll('p').forEach(p => p.classList.remove('visible'));
+        item.querySelector('.menu-text').classList.remove('visible');
       }
     });
   }
