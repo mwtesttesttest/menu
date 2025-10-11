@@ -13,19 +13,17 @@
       padding: 0;
       color: #222;
       overflow-x: hidden;
+      background: url('TLO.jpg') center center / cover no-repeat fixed;
       scroll-behavior: smooth;
-      background: linear-gradient(to bottom, rgba(30,30,30,0.6), rgba(255,255,255,0.1)), url('TLO.jpg') center center / cover no-repeat fixed;
-      transition: background 0.3s ease;
     }
-
     h1 {
       text-align: center;
       padding: 25px;
       font-size: 1.8em;
-      color: #fff;
+      color: #222;
       letter-spacing: 0.5px;
       font-weight: 600;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
     }
 
     .menu-container { width: 100%; }
@@ -59,7 +57,7 @@
 
     .menu-item img:hover {
       transform: scale(1.08);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.45), 0 0 20px rgba(255,200,100,0.15);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 200, 100, 0.15);
     }
 
     .menu-text {
@@ -208,15 +206,6 @@
           item.classList.remove('visible');
         }
       });
-
-      // Dynamiczny gradient tła
-      const scrollY = window.scrollY;
-      const maxScroll = document.body.scrollHeight - window.innerHeight;
-      const scrollFraction = scrollY / maxScroll;
-
-      const topColor = `rgba(${30 + scrollFraction*50}, ${30 + scrollFraction*50}, ${30 + scrollFraction*50}, 0.6)`;
-      const bottomColor = `rgba(${255 - scrollFraction*20}, ${255 - scrollFraction*20}, ${255 - scrollFraction*20}, 0.1)`;
-      document.body.style.background = `linear-gradient(to bottom, ${topColor}, ${bottomColor}), url('TLO.jpg') center center / cover no-repeat fixed`;
     }
 
     window.addEventListener('scroll', handleScroll);
