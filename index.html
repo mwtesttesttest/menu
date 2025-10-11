@@ -13,27 +13,41 @@
     padding: 0;
     color: #222;
     scroll-behavior: smooth;
-    /* Tło rozciągnięte na całą długość strony */
-    background: url('TLO.jpg') top center no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+    overflow-x: hidden;
   }
 
-  /* Nagłówek obrazkowy */
+  /* kontener paralaksy */
+  .parallax {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('TLO.jpg') top center no-repeat;
+    background-size: cover;
+    z-index: -1;
+    transform: translateY(0);
+    transition: transform 0.1s linear;
+  }
+
   .header-image {
     width: 100%;
     max-height: 120px;
     object-fit: contain;
     display: block;
+    z-index: 2;
+    position: relative;
   }
 
   .menu-container {
     padding: 20px 0;
+    position: relative;
+    z-index: 1;
   }
 
   .menu-item {
     display: flex;
-    flex-direction: column; /* Tekst pod obrazkiem */
+    flex-direction: column; /* tekst pod zdjęciem */
     align-items: center;
     position: relative;
     overflow: hidden;
@@ -43,11 +57,7 @@
     transition: all 1s ease-out;
   }
 
-  /* animacja fade-in przy scrollu */
-  .menu-item.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .menu-item.visible { opacity: 1; transform: translateY(0); }
 
   /* zdjęcia w kole */
   .menu-item img {
@@ -91,7 +101,6 @@
     line-height: 1.8;
   }
 
-  /* punkty dla pozycji w menu */
   .menu-text p::before { content: "• "; color: #222; }
   .menu-text .no-dot { color: #888; text-indent: 0; }
   .menu-text .no-dot::before { content: ""; }
@@ -106,6 +115,8 @@
 </style>
 </head>
 <body>
+
+<div class="parallax"></div>
 
 <img src="napismenu.jpg" alt="Menu" class="header-image">
 
@@ -196,22 +207,28 @@
 </div>
 
 <script>
-const items = document.querySelectorAll('.menu-item');
-function handleScroll() {
-  items.forEach(item => {
-    const rect = item.getBoundingClientRect();
-    if(rect.top < window.innerHeight * 0.8 && rect.bottom > 0){
-      item.classList.add('visible');
-    } else {
-      item.classList.remove('visible');
-    }
+  // animacja fade-in przy scrollu
+  const items = document.querySelectorAll('.menu-item');
+  function handleScroll() {
+    items.forEach(item => {
+      const rect = item.getBoundingClientRect();
+      if(rect.top < window.innerHeight * 0.8 && rect.bottom > 0){
+        item.classList.add('visible');
+      } else {
+        item.classList.remove('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', handleScroll);
+  handleScroll();
+
+  // paralaksa tła
+  const parallax = document.querySelector('.parallax');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    parallax.style.transform = `translateY(${scrollY * 0.3}px)`; // delikatny ruch tła
   });
-}
-window.addEventListener('scroll', handleScroll);
-handleScroll();
 </script>
 
 </body>
 </html>
-
-
