@@ -13,9 +13,11 @@
       padding: 0;
       color: #222;
       overflow-x: hidden;
-      background: url('TLO.jpg') center center / cover no-repeat fixed;
       scroll-behavior: smooth;
+      background: url('TLO.jpg') center center / cover no-repeat fixed;
+      background-size: cover;
     }
+
     h1 {
       text-align: center;
       padding: 25px;
@@ -23,6 +25,7 @@
       color: #222;
       letter-spacing: 0.5px;
       font-weight: 600;
+      text-align: center;
     }
 
     .menu-container { width: 100%; }
@@ -31,7 +34,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 85vh;
+      min-height: 85vh;
       position: relative;
       overflow: hidden;
       transition: all 0.6s ease-out;
@@ -62,12 +65,13 @@
     .menu-text {
       width: 45vw;
       max-width: 420px;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.75);
       backdrop-filter: blur(5px);
       padding: 25px 30px;
       border-radius: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       transition: box-shadow 0.5s ease;
+      text-align: justify;
     }
 
     .menu-item.visible {
@@ -77,32 +81,38 @@
 
     .menu-item.visible img { transform: scale(1.05); }
 
-    .menu-item.left .menu-text { margin-left: 5vw; text-align: left; }
-    .menu-item.right .menu-text { margin-right: 5vw; text-align: right; }
+    .menu-item.left .menu-text { margin-left: 5vw; }
+    .menu-item.right .menu-text { margin-right: 5vw; }
 
     h2 {
       font-size: 1.2em;
       font-weight: 600;
-      margin: 0 0 8px 0;
+      margin: 0 0 12px 0;
       color: #111;
-      text-shadow: none; /* całkowicie usunięty cień */
+      text-shadow: none;
+      text-align: justify;
     }
 
     p {
       font-size: 1em;
       font-weight: 400;
-      margin: 3px 0;
-      line-height: 1.5;
+      margin: 8px 0; /* większe interlinie między pozycjami */
+      line-height: 1.8;
       color: #333;
-      text-shadow: none; /* całkowicie usunięty cień */
+      text-shadow: none;
+    }
+
+    p::before {
+      content: "• "; /* elegancki punkt */
+      color: #222;
     }
 
     @media (max-width: 600px) {
-      .menu-item { flex-direction: column !important; justify-content: center; height: auto; padding: 40px 0; }
+      .menu-item { flex-direction: column !important; justify-content: center; min-height: auto; padding: 40px 0; }
       .menu-item img { width: 70vw; height: 70vw; margin-bottom: 20px; }
-      .menu-text { width: 80%; text-align: center !important; margin: 0; font-size: 1em; }
+      .menu-text { width: 80%; margin: 0; font-size: 1em; text-align: justify; }
       h2 { font-size: 1.1em; }
-      p { font-size: 0.95em; }
+      p { font-size: 0.95em; line-height: 1.6; }
     }
   </style>
 </head>
@@ -115,7 +125,7 @@
       <img src="zupa.jpg" alt="Zupa serwowana">
       <div class="menu-text">
         <h2>ZUPA SERWOWANA</h2>
-        <p>Tradycyjny rosół drobiowy ggggggz makaronem domowym</p>
+        <p>Tradycyjny rosół drobiowy z makaronem domowym</p>
       </div>
     </div>
 
@@ -123,7 +133,10 @@
       <img src="obiad.png" alt="Drugie danie serwowane">
       <div class="menu-text">
         <h2>DRUGIE DANIE SERWOWANE</h2>
-        <p>Filet z kurczaka faszerowany serem mozzarella z sosem pieczeniowym na puree ziemniaczanym z koperkiem z surówką Coleslaw</p>
+        <p>Filet z kurczaka faszerowany serem mozzarella</p>
+        <p>Sos pieczeniowy</p>
+        <p>Puree ziemniaczane z koperkiem</p>
+        <p>Surówka Coleslaw</p>
       </div>
     </div>
 
@@ -212,5 +225,3 @@
   </script>
 </body>
 </html>
-
-
