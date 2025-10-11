@@ -16,14 +16,14 @@
     overflow-x: hidden;
   }
 
-  /* kontener paralaksy */
+  /* paralaksa tła */
   .parallax {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('tlotlo.png') top center no-repeat;
+    background: url('TLO.jpg') top center no-repeat;
     background-size: cover;
     z-index: -1;
     transform: translateY(0);
@@ -35,8 +35,8 @@
     max-height: 120px;
     object-fit: contain;
     display: block;
-    z-index: 2;
     position: relative;
+    z-index: 2;
   }
 
   .menu-container {
@@ -59,7 +59,6 @@
 
   .menu-item.visible { opacity: 1; transform: translateY(0); }
 
-  /* zdjęcia w kole */
   .menu-item img {
     width: 50vw;
     max-width: 360px;
@@ -77,10 +76,12 @@
     box-shadow: 0 15px 35px rgba(0,0,0,0.45);
   }
 
+  /* przyciemnione tło pod tekstem */
   .menu-text {
     width: 80%;
     max-width: 420px;
-    background: rgba(255,255,255,0.65);
+    background: rgba(0,0,0,0.45); /* lekko przyciemnione */
+    color: #fff; /* tekst jasny */
     backdrop-filter: blur(5px);
     padding: 20px 25px;
     border-radius: 20px;
@@ -101,8 +102,8 @@
     line-height: 1.8;
   }
 
-  .menu-text p::before { content: "• "; color: #222; }
-  .menu-text .no-dot { color: #888; text-indent: 0; }
+  .menu-text p::before { content: "• "; color: #fff; }
+  .menu-text .no-dot { color: #ccc; text-indent: 0; }
   .menu-text .no-dot::before { content: ""; }
 
   @media (max-width: 600px) {
@@ -207,12 +208,11 @@
 </div>
 
 <script>
-  // animacja fade-in przy scrollu
   const items = document.querySelectorAll('.menu-item');
   function handleScroll() {
     items.forEach(item => {
       const rect = item.getBoundingClientRect();
-      if(rect.top < window.innerHeight * 0.8 && rect.bottom > 0){
+      if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
         item.classList.add('visible');
       } else {
         item.classList.remove('visible');
@@ -226,7 +226,7 @@
   const parallax = document.querySelector('.parallax');
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
-    parallax.style.transform = `translateY(${scrollY * 0.3}px)`; // delikatny ruch tła
+    parallax.style.transform = `translateY(${scrollY * 0.3}px)`;
   });
 </script>
 
