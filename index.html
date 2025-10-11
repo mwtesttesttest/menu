@@ -11,9 +11,10 @@
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    color: #222;
+    color: #fff;
     scroll-behavior: smooth;
     overflow-x: hidden;
+    background: #000;
   }
 
   /* paralaksa tła */
@@ -76,17 +77,13 @@
     box-shadow: 0 15px 35px rgba(0,0,0,0.45);
   }
 
-  /* przyciemnione tło pod tekstem */
+  /* tekst bez tła */
   .menu-text {
     width: 80%;
     max-width: 420px;
-    background: rgba(0,0,0,0.45); /* lekko przyciemnione */
-    color: #fff; /* tekst jasny */
-    backdrop-filter: blur(5px);
-    padding: 20px 25px;
-    border-radius: 20px;
+    padding: 0;
     text-align: justify;
-    transition: all 0.5s ease;
+    color: #fff;
   }
 
   h2 {
@@ -208,28 +205,29 @@
 </div>
 
 <script>
-  const items = document.querySelectorAll('.menu-item');
-  function handleScroll() {
-    items.forEach(item => {
-      const rect = item.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
-        item.classList.add('visible');
-      } else {
-        item.classList.remove('visible');
-      }
-    });
-  }
-  window.addEventListener('scroll', handleScroll);
-  handleScroll();
-
-  // paralaksa tła
-  const parallax = document.querySelector('.parallax');
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    parallax.style.transform = `translateY(${scrollY * 0.3}px)`;
+const items = document.querySelectorAll('.menu-item');
+function handleScroll() {
+  items.forEach(item => {
+    const rect = item.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+      item.classList.add('visible');
+    } else {
+      item.classList.remove('visible');
+    }
   });
+}
+window.addEventListener('scroll', handleScroll);
+handleScroll();
+
+// paralaksa tła
+const parallax = document.querySelector('.parallax');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  parallax.style.transform = `translateY(${scrollY * 0.3}px)`;
+});
 </script>
 
 </body>
 </html>
+
 
