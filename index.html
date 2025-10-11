@@ -1,221 +1,209 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Menu Restauracji</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-      color: #222;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      background: url('tlotlo.jpg') center top / cover no-repeat fixed;
-      background-size: cover;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Menu Restauracji</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #222;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    background: url('tlotlo.jpg') center top repeat-y;
+    background-size: 100% auto;
+  }
 
-    .header-image {
-      width: 100%;
-      display: block;
-      max-height: 150px;
-      object-fit: contain;
-    }
+  .header-image {
+    width: 100%;
+    display: block;
+    max-height: 150px;
+    object-fit: contain;
+  }
 
-    .menu-container {
-      padding: 20px 0;
-    }
+  .menu-container {
+    padding: 20px 0;
+  }
 
-    .menu-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.6s ease-out;
-      opacity: 0;
-      transform: translateY(50px);
-      height: auto;
-      padding: 40px 0;
-    }
+  .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.6s ease-out;
+    opacity: 0;
+    transform: translateY(50px);
+    height: auto;
+    padding: 30px 0;
+  }
 
-    .menu-item.left { flex-direction: row; }
-    .menu-item.right { flex-direction: row-reverse; }
+  .menu-item.left { flex-direction: row; }
+  .menu-item.right { flex-direction: row-reverse; }
 
-    .menu-item img {
-      width: 50vw;
-      height: 50vw;
-      max-width: 360px;
-      max-height: 360px;
-      object-fit: cover;
-      border-radius: 50%;
-      flex-shrink: 0;
-      transition: transform 0.8s ease-out, box-shadow 0.5s ease;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.35);
-    }
+  .menu-item img {
+    width: 45vw;
+    height: 45vw;
+    max-width: 360px;
+    max-height: 360px;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: transform 0.8s ease-out;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+  }
 
-    .menu-item img:hover {
-      transform: scale(1.08);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
-    }
+  .menu-text {
+    width: 45vw;
+    max-width: 420px;
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(4px);
+    padding: 20px 25px;
+    border-radius: 15px;
+    text-align: justify;
+  }
 
-    .menu-text {
-      width: 45vw;
-      max-width: 420px;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(5px);
-      padding: 25px 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      transition: box-shadow 0.5s ease;
-      text-align: justify;
-    }
+  .menu-item.visible { opacity: 1; transform: translateY(0); }
+  .menu-item.visible img { transform: scale(1.05); }
 
-    .menu-item.visible { opacity: 1; transform: translateY(0); }
-    .menu-item.visible img { transform: scale(1.05); }
+  .menu-item.left .menu-text { margin-left: 5vw; }
+  .menu-item.right .menu-text { margin-right: 5vw; }
 
-    .menu-item.left .menu-text { margin-left: 5vw; }
-    .menu-item.right .menu-text { margin-right: 5vw; }
+  h2 {
+    font-size: 1.4em;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    text-align: center;
+  }
 
-    h2 {
-      font-size: 1.4em;
-      font-weight: 600;
-      margin: 0 0 12px 0;
-      color: #111;
-      text-shadow: none;
-      text-align: center;
-    }
+  p {
+    font-size: 1em;
+    margin: 5px 0;
+    line-height: 1.8;
+  }
 
-    p {
-      font-size: 1em;
-      font-weight: 400;
-      margin: 6px 0;
-      line-height: 1.8;
-      color: #333;
-      text-shadow: none;
-    }
+  .menu-text p::before { content: "• "; color: #222; }
+  .menu-text .no-dot { color: #888; text-indent: 0; }
+  .menu-text .no-dot::before { content: ""; }
 
-    .menu-text p::before { content: "• "; color: #222; }
-    .menu-text .no-dot { color: #888; text-indent: 0; }
-    .menu-text .no-dot::before { content: ""; }
-
-    @media (max-width: 600px) {
-      .menu-item { flex-direction: column !important; justify-content: center; min-height: auto; padding: 30px 0; }
-      .menu-item img { width: 70vw; height: 70vw; margin-bottom: 20px; }
-      .menu-text { width: 80%; margin: 0; font-size: 1em; text-align: justify; }
-      h2 { font-size: 1.2em; }
-      p { font-size: 0.95em; line-height: 1.6; }
-      .header-image { max-height: 120px; }
-    }
-  </style>
+  @media (max-width: 600px) {
+    .menu-item { flex-direction: column; padding: 20px 0; }
+    .menu-item img { width: 70vw; height: 70vw; margin-bottom: 15px; }
+    .menu-text { width: 80%; text-align: justify; margin: 0 auto; }
+    h2 { font-size: 1.2em; }
+    p { font-size: 0.95em; line-height: 1.6; }
+    .header-image { max-height: 120px; }
+  }
+</style>
 </head>
 <body>
 
-  <img src="napismenu.jpg" alt="Menu" class="header-image">
+<img src="napismenu.jpg" alt="Menu" class="header-image">
 
-  <div class="menu-container">
-
-    <div class="menu-item left">
-      <img src="zupa.jpg" alt="Zupa serwowana">
-      <div class="menu-text">
-        <h2>ZUPA SERWOWANA</h2>
-        <p>Tradycyjny rosół drobiowy z makaronem domowym,</p>
-        <p>Krem pomidorowy z ziołowymi grzankami - dla wegetarian,</p>
-      </div>
+<div class="menu-container">
+  <div class="menu-item left">
+    <img src="zupa.jpg" alt="Zupa serwowana">
+    <div class="menu-text">
+      <h2>ZUPA SERWOWANA</h2>
+      <p>Tradycyjny rosół drobiowy z makaronem domowym,</p>
+      <p>Krem pomidorowy z ziołowymi grzankami - dla wegetarian,</p>
     </div>
-
-    <div class="menu-item right">
-      <img src="obiad.png" alt="Drugie danie serwowane">
-      <div class="menu-text">
-        <h2>DRUGIE DANIE SERWOWANE</h2>
-        <p>Filet z kurczaka faszerowany serem mozzarella,</p>
-        <p>Papryka faszerowana ryżem i warzywami z sosem pomidorowym,</p>
-      </div>
-    </div>
-
-    <div class="menu-item left">
-      <img src="zupawbemarach.png" alt="Zupy w bufecie">
-      <div class="menu-text">
-        <h2>ZUPY W BUFECIE</h2>
-        <p>Żurek na wędzonym żeberku,</p>
-        <p>Wegański barszczyk czerwony z pasztecikiem,</p>
-      </div>
-    </div>
-
-    <div class="menu-item right">
-      <img src="ciepleprzekaskiwbufecie.png" alt="Ciepłe przekąski w bufecie">
-      <div class="menu-text">
-        <h2>CIEPŁE PRZEKĄSKI W BUFECIE</h2>
-        <p>Makaron penne z kurczakiem w sosie serowym,</p>
-        <p>Gyros drobiowy z sosem czosnkowym,</p>
-        <p>Leczo warzywne z pieczarkami,</p>
-      </div>
-    </div>
-
-    <div class="menu-item left">
-      <img src="ziemniakipieczone.png" alt="Dodatki">
-      <div class="menu-text">
-        <h2>DODATKI</h2>
-        <p>Ziemniaczki pieczone,</p>
-        <p>Ryż z warzywami,</p>
-        <p>Zestaw świeżych surówek Szefa Kuchni,</p>
-      </div>
-    </div>
-
-    <div class="menu-item right">
-      <img src="polmisekmies.png" alt="Przekąski zimne">
-      <div class="menu-text">
-        <h2>PRZEKĄSKI ZIMNE</h2>
-        <p>Półmisek mięs pieczonych,</p>
-        <p>Kęski z kurczaka w panko z sosem słodko-kwaśnym,</p>
-        <p>Kabanosy w cieście francuskim,</p>
-        <p>Aksamitny szpinakowy biszkopt z wędzonym łososiem i ziołowym serkiem,</p>
-        <p>Tortilla z grillowanym kurczakiem i warzywami,</p>
-        <p>Humus ze świeżymi warzywami,</p>
-        <p>Quesadillas z kurczakiem, chorizo, serem żółtym, pomidorami i ostrym sosem wasabi,</p>
-        <p>Tradycyjna sałatka grecka,</p>
-        <p>Sałatka z burakiem i fetą,</p>
-        <p>Grillowane warzywa z sezamem i marynowanym tofu – wegańskie,</p>
-      </div>
-    </div>
-
-    <div class="menu-item left">
-      <img src="slodkosci.png" alt="Słodkości i napoje">
-      <div class="menu-text">
-        <h2>SŁODKOŚCI I NAPOJE</h2>
-        <p>Ręcznie robione ciasta,</p>
-        <p>Słodkie muffinki,</p>
-        <p>Delikatne babeczki,</p>
-        <p>Świeże owoce,</p>
-        <p>Aksamitna kawa*,</p>
-        <p>Wyrazista herbata czarna, owocowa,</p>
-        <p>Woda mineralna,</p>
-        <p>Coca-Cola,</p>
-        <p>Mirinda,</p>
-        <p>Sok pomarańczowy,</p>
-        <p class="no-dot">*możliwe mleko krowie lub mleko roślinne</p>
-      </div>
-    </div>
-
   </div>
 
-  <script>
-    const items = document.querySelectorAll('.menu-item');
-    function handleScroll() {
-      items.forEach(item => {
-        const rect = item.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
-          item.classList.add('visible');
-        } else {
-          item.classList.remove('visible');
-        }
-      });
+  <div class="menu-item right">
+    <img src="obiad.png" alt="Drugie danie serwowane">
+    <div class="menu-text">
+      <h2>DRUGIE DANIE SERWOWANE</h2>
+      <p>Filet z kurczaka faszerowany serem mozzarella,</p>
+      <p>Papryka faszerowana ryżem i warzywami z sosem pomidorowym,</p>
+    </div>
+  </div>
+
+  <div class="menu-item left">
+    <img src="zupawbemarach.png" alt="Zupy w bufecie">
+    <div class="menu-text">
+      <h2>ZUPY W BUFECIE</h2>
+      <p>Żurek na wędzonym żeberku,</p>
+      <p>Wegański barszczyk czerwony z pasztecikiem,</p>
+    </div>
+  </div>
+
+  <div class="menu-item right">
+    <img src="ciepleprzekaskiwbufecie.png" alt="Ciepłe przekąski w bufecie">
+    <div class="menu-text">
+      <h2>CIEPŁE PRZEKĄSKI W BUFECIE</h2>
+      <p>Makaron penne z kurczakiem w sosie serowym,</p>
+      <p>Gyros drobiowy z sosem czosnkowym,</p>
+      <p>Leczo warzywne z pieczarkami,</p>
+    </div>
+  </div>
+
+  <div class="menu-item left">
+    <img src="ziemniakipieczone.png" alt="Dodatki">
+    <div class="menu-text">
+      <h2>DODATKI</h2>
+      <p>Ziemniaczki pieczone,</p>
+      <p>Ryż z warzywami,</p>
+      <p>Zestaw świeżych surówek Szefa Kuchni,</p>
+    </div>
+  </div>
+
+  <div class="menu-item right">
+    <img src="polmisekmies.png" alt="Przekąski zimne">
+    <div class="menu-text">
+      <h2>PRZEKĄSKI ZIMNE</h2>
+      <p>Półmisek mięs pieczonych,</p>
+      <p>Kęski z kurczaka w panko z sosem słodko-kwaśnym,</p>
+      <p>Kabanosy w cieście francuskim,</p>
+      <p>Aksamitny szpinakowy biszkopt z wędzonym łososiem i ziołowym serkiem,</p>
+      <p>Tortilla z grillowanym kurczakiem i warzywami,</p>
+      <p>Humus ze świeżymi warzywami,</p>
+      <p>Quesadillas z kurczakiem, chorizo, serem żółtym, pomidorami i ostrym sosem wasabi,</p>
+      <p>Tradycyjna sałatka grecka,</p>
+      <p>Sałatka z burakiem i fetą,</p>
+      <p>Grillowane warzywa z sezamem i marynowanym tofu – wegańskie,</p>
+    </div>
+  </div>
+
+  <div class="menu-item left">
+    <img src="slodkosci.png" alt="Słodkości i napoje">
+    <div class="menu-text">
+      <h2>SŁODKOŚCI I NAPOJE</h2>
+      <p>Ręcznie robione ciasta,</p>
+      <p>Słodkie muffinki,</p>
+      <p>Delikatne babeczki,</p>
+      <p>Świeże owoce,</p>
+      <p>Aksamitna kawa*,</p>
+      <p>Wyrazista herbata czarna, owocowa,</p>
+      <p>Woda mineralna,</p>
+      <p>Coca-Cola,</p>
+      <p>Mirinda,</p>
+      <p>Sok pomarańczowy,</p>
+      <p class="no-dot">*możliwe mleko krowie lub mleko roślinne</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const items = document.querySelectorAll('.menu-item');
+function handleScroll() {
+  items.forEach(item => {
+    const rect = item.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
+      item.classList.add('visible');
+    } else {
+      item.classList.remove('visible');
     }
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-  </script>
+  });
+}
+window.addEventListener('scroll', handleScroll);
+handleScroll();
+</script>
+
 </body>
 </html>
+
