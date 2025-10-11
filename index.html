@@ -52,14 +52,22 @@
     right: 10px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
     z-index: 3;
     transform: translateY(10px);
   }
 
   .flags-container img {
-    width: 30px;
+    width: 40px;
     cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .flags-container img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
   }
 
   .menu-container {
@@ -145,7 +153,7 @@
   .allergen-warning {
     width: 90%;
     max-width: 800px;
-    background: rgba(255,255,255,0.8);
+    background: rgba(200,200,200,0.3);
     margin: 30px auto 50px auto;
     padding: 15px 20px;
     border-radius: 15px;
@@ -398,4 +406,3 @@
 
 </body>
 </html>
-
