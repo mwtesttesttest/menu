@@ -16,13 +16,13 @@
     overflow-x: hidden;
   }
 
-  /* kontener paralaksy */
+  /* kontener paralaksy - tło przewija się wraz ze scrollowaniem */
   .parallax {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 200%;
+    height: 100%;
     background: url('TLO.jpg') top center no-repeat;
     background-size: cover;
     z-index: -1;
@@ -220,14 +220,14 @@
   window.addEventListener('scroll', handleScroll);
   handleScroll();
 
-  // paralaksa tła - wolniejszy ruch
+  // paralaksa tła - tło przewija się wzdłuż całej strony
   const parallax = document.querySelector('.parallax');
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
-    parallax.style.transform = `translateY(${scrollY * 0.1}px)`;
+    // tło przesuwa się wolniej od scrolla
+    parallax.style.transform = `translateY(${scrollY * 0.05}px)`;
   });
 </script>
 
 </body>
 </html>
-
