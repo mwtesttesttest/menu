@@ -54,6 +54,7 @@
     transform: translateY(50px);
     padding: 40px 0;
     transition: all 1s ease-out;
+    width: 100%;
   }
 
   .menu-item.visible { opacity: 1; transform: translateY(0); }
@@ -75,12 +76,21 @@
     box-shadow: 0 15px 35px rgba(0,0,0,0.45);
   }
 
+  /* pojedynczy prostokąt dla każdej potrawy */
   .menu-text {
     width: 80%;
-    max-width: 420px;
-    padding: 20px 25px;
-    border-radius: 20px;
+    max-width: 500px;
+    background: rgba(255,255,255,0.5);
+    padding: 15px 20px;
+    border-radius: 15px;
     text-align: justify;
+    margin-bottom: 10px;
+    transition: all 0.8s ease-out;
+  }
+
+  /* dla sekcji ze wszystkimi potrawami razem */
+  .menu-text.full {
+    padding: 20px 25px;
   }
 
   h2 {
@@ -90,20 +100,11 @@
     text-align: center;
   }
 
-  /* półprzezroczyste prostokąty dla akapitów z animacją */
-  .menu-text p {
+  p {
     font-size: 1em;
-    margin: 8px 0;
+    margin: 5px 0;
     line-height: 1.8;
-    background: rgba(255,255,255,0.5);
-    padding: 8px 12px;
-    border-radius: 10px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease-out;
   }
-
-  .menu-text p.visible { opacity: 1; transform: translateY(0); }
 
   .menu-text p::before { content: "• "; color: #222; }
   .menu-text .no-dot { color: #888; text-indent: 0; }
@@ -112,6 +113,7 @@
   @media (max-width: 600px) {
     .menu-item img { width: 70vw; height: 70vw; margin-bottom: 15px; }
     .menu-text { width: 90%; font-size: 1em; }
+    .menu-text.full { width: 90%; }
     h2 { font-size: 1.2em; }
     p { font-size: 0.95em; line-height: 1.6; }
     .header-image { max-height: 100px; }
@@ -126,56 +128,47 @@
 
 <div class="menu-container">
 
+  <!-- Zupy -->
   <div class="menu-item">
     <img src="zupa.jpg" alt="Zupa serwowana">
-    <div class="menu-text">
-      <h2>ZUPA SERWOWANA</h2>
-      <p>Tradycyjny rosół drobiowy z domowym makaronem,</p>
-      <p>Aksamitny krem pomidorowy z ziołowymi grzankami - dla wegetarian</p>
-    </div>
+    <div class="menu-text"><h2>ZUPA SERWOWANA</h2><p>Tradycyjny rosół drobiowy z domowym makaronem,</p></div>
+    <div class="menu-text"><p>Aksamitny krem pomidorowy z ziołowymi grzankami - dla wegetarian</p></div>
   </div>
 
+  <!-- Drugie danie -->
   <div class="menu-item">
     <img src="obiad.png" alt="Drugie danie serwowane">
-    <div class="menu-text">
-      <h2>DRUGIE DANIE SERWOWANE</h2>
-      <p>Filet z kurczaka faszerowany serem mozzarella z sosem pieczeniowym na puree z koperkiem z surówką Coleslaw,</p>
-      <p>Pieczona papryka faszerowana ryżem i warzywami z sosem pomidorowym - dla wegetarian</p>
-    </div>
+    <div class="menu-text"><h2>DRUGIE DANIE SERWOWANE</h2><p>Filet z kurczaka faszerowany serem mozzarella z sosem pieczeniowym na puree z koperkiem z surówką Coleslaw,</p></div>
+    <div class="menu-text"><p>Pieczona papryka faszerowana ryżem i warzywami z sosem pomidorowym - dla wegetarian</p></div>
   </div>
 
+  <!-- Zupy w bufecie -->
   <div class="menu-item">
     <img src="zupawbemarach.png" alt="Zupy w bufecie">
-    <div class="menu-text">
-      <h2>ZUPY W BUFECIE</h2>
-      <p>Żurek na wędzonym żeberku,</p>
-      <p>Wegański barszczyk czerwony z pasztecikiem</p>
-    </div>
+    <div class="menu-text"><h2>ZUPY W BUFECIE</h2><p>Żurek na wędzonym żeberku,</p></div>
+    <div class="menu-text"><p>Wegański barszczyk czerwony z pasztecikiem</p></div>
   </div>
 
+  <!-- Ciepłe przekąski -->
   <div class="menu-item">
     <img src="ciepleprzekaskiwbufecie.png" alt="Ciepłe przekąski w bufecie">
-    <div class="menu-text">
-      <h2>CIEPŁE PRZEKĄSKI W BUFECIE</h2>
-      <p>Makaron penne z kurczakiem w sosie serowym,</p>
-      <p>Gyros drobiowy z sosem czosnkowym,</p>
-      <p>Wegetariańskie leczo warzywne z pieczarkami</p>
-    </div>
+    <div class="menu-text"><h2>CIEPŁE PRZEKĄSKI W BUFECIE</h2><p>Makaron penne z kurczakiem w sosie serowym,</p></div>
+    <div class="menu-text"><p>Gyros drobiowy z sosem czosnkowym,</p></div>
+    <div class="menu-text"><p>Wegetariańskie leczo warzywne z pieczarkami</p></div>
   </div>
 
+  <!-- Dodatki -->
   <div class="menu-item">
     <img src="ziemniakipieczone.png" alt="Dodatki">
-    <div class="menu-text">
-      <h2>DODATKI</h2>
-      <p>Ziemniaczki pieczone,</p>
-      <p>Ryż biały z warzywami,</p>
-      <p>Zestaw świeżych surówek Szefa Kuchni</p>
-    </div>
+    <div class="menu-text"><h2>DODATKI</h2><p>Ziemniaczki pieczone,</p></div>
+    <div class="menu-text"><p>Ryż biały z warzywami,</p></div>
+    <div class="menu-text"><p>Zestaw świeżych surówek Szefa Kuchni</p></div>
   </div>
 
+  <!-- Przekąski zimne (jeden prostokąt) -->
   <div class="menu-item">
     <img src="polmisekmies.png" alt="Przekąski zimne">
-    <div class="menu-text">
+    <div class="menu-text full">
       <h2>PRZEKĄSKI ZIMNE</h2>
       <p>Półmisek mięs pieczonych,</p>
       <p>Kęski z kurczaka w panko z sosem słodko-kwaśnym,</p>
@@ -190,9 +183,10 @@
     </div>
   </div>
 
+  <!-- Słodkości i napoje (jeden prostokąt) -->
   <div class="menu-item">
     <img src="slodkosci.png" alt="Słodkości i napoje">
-    <div class="menu-text">
+    <div class="menu-text full">
       <h2>SŁODKOŚCI I NAPOJE</h2>
       <p>Ręcznie robione ciasta,</p>
       <p>Słodkie muffinki,</p>
@@ -211,25 +205,15 @@
 </div>
 
 <script>
-  // animacja fade-in dla sekcji i akapitów
+  // animacja fade-in przy scrollu
   const items = document.querySelectorAll('.menu-item');
   function handleScroll() {
     items.forEach(item => {
       const rect = item.getBoundingClientRect();
       if(rect.top < window.innerHeight * 0.8 && rect.bottom > 0){
         item.classList.add('visible');
-
-        // animacja akapitów w danej sekcji
-        const paragraphs = item.querySelectorAll('p');
-        paragraphs.forEach((p, i) => {
-          setTimeout(() => {
-            p.classList.add('visible');
-          }, i * 100); // kolejne akapity pojawiają się co 100ms
-        });
-
       } else {
         item.classList.remove('visible');
-        item.querySelectorAll('p').forEach(p => p.classList.remove('visible'));
       }
     });
   }
@@ -246,5 +230,6 @@
 
 </body>
 </html>
+
 
 
