@@ -4,13 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu Restauracji</title>
+
+  <!-- Nowoczesna czcionka Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
     * {
       box-sizing: border-box;
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
       color: #222;
@@ -22,9 +26,10 @@
     h1 {
       text-align: center;
       padding: 20px;
-      font-size: 2em;
+      font-size: 1.6em;
       color: #222;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
+      font-weight: 500;
     }
 
     .menu-container {
@@ -41,26 +46,30 @@
       transition: all 0.6s ease-out;
     }
 
+    /* okrągłe zdjęcia potraw */
     .menu-item img {
-      width: 100vw;
-      height: 100%;
+      width: 70vw;
+      height: 70vw;
+      max-width: 320px;
+      max-height: 320px;
       object-fit: cover;
+      border-radius: 50%;
       position: absolute;
-      top: 0;
+      top: 50%;
+      transform: translateY(-50%);
       z-index: 1;
       transition: transform 1s ease-out;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
     }
 
-    /* zdjęcie po lewej stronie – widać tylko połowę */
+    /* zdjęcie po lewej – przesunięte w połowie poza ekran */
     .menu-item.left img {
-      left: -40vw;
-      clip-path: inset(0 40% 0 0);
+      left: -35vw;
     }
 
-    /* zdjęcie po prawej stronie – widać tylko połowę */
+    /* zdjęcie po prawej – przesunięte w połowie poza ekran */
     .menu-item.right img {
-      right: -40vw;
-      clip-path: inset(0 0 0 40%);
+      right: -35vw;
     }
 
     .menu-text {
@@ -69,13 +78,13 @@
       background: rgba(255, 255, 255, 0.85);
       padding: 20px;
       border-radius: 20px;
-      font-size: 1.1em;
-      width: 70%;
-      max-width: 300px;
-      line-height: 1.4;
+      font-size: 1em;
+      line-height: 1.5;
       opacity: 0;
       transform: translateY(30px);
       transition: all 0.6s ease-out;
+      width: 70%;
+      max-width: 280px;
     }
 
     .menu-item.visible .menu-text {
@@ -83,14 +92,15 @@
       transform: translateY(0);
     }
 
+    /* tekst wyrównany do krawędzi zdjęcia */
     .menu-item.left .menu-text {
       margin-left: auto;
-      margin-right: 10vw;
+      margin-right: calc(35vw + 10px);
       text-align: right;
     }
 
     .menu-item.right .menu-text {
-      margin-left: 10vw;
+      margin-left: calc(35vw + 10px);
       text-align: left;
     }
 
@@ -101,15 +111,22 @@
 
       .menu-text {
         font-size: 1em;
-        width: 80%;
+        width: 75%;
       }
 
       .menu-item.left .menu-text {
-        margin-right: 8vw;
+        margin-right: calc(30vw + 8px);
       }
 
       .menu-item.right .menu-text {
-        margin-left: 8vw;
+        margin-left: calc(30vw + 8px);
+      }
+
+      .menu-item img {
+        width: 65vw;
+        height: 65vw;
+        max-width: none;
+        max-height: none;
       }
     }
   </style>
@@ -121,7 +138,7 @@
   <div class="menu-container">
 
     <div class="menu-item left">
-      <img src="zupa.jpg" alt="Tradycyjny rosół drobiowy z tofu z makaronem drobiowym">
+      <img src="zupa.jpg" alt="Tradycyjny rosół drobiowy z makaronem drobiowym">
       <div class="menu-text">
         <h2>Tradycyjny rosół drobiowy</h2>
         <p>z makaronem drobiowym</p>
@@ -154,13 +171,13 @@
         const rect = item.getBoundingClientRect();
         const img = item.querySelector('img');
 
-        // Efekt skalowania zdjęcia + pojawienie się tekstu
+        // animacja przy przewijaniu
         if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
           item.classList.add('visible');
-          img.style.transform = 'scale(1.05)';
+          img.style.transform = 'translateY(-50%) scale(1.05)';
         } else {
           item.classList.remove('visible');
-          img.style.transform = 'scale(1)';
+          img.style.transform = 'translateY(-50%) scale(1)';
         }
       });
     }
