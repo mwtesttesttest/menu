@@ -31,8 +31,8 @@
 
   .menu-item {
     display: flex;
+    flex-direction: column; /* Tekst pod obrazkiem */
     align-items: center;
-    justify-content: space-between;
     position: relative;
     overflow: hidden;
     transition: all 0.6s ease-out;
@@ -41,24 +41,24 @@
     padding: 30px 0;
   }
 
-  .menu-item.left { flex-direction: row; }
-  .menu-item.right { flex-direction: row-reverse; }
-
   .menu-item img {
-    width: 45vw;
-    height: 45vw;
-    max-width: 300px;
-    max-height: 300px;
-    object-fit: cover;
+    width: 60vw;
+    max-width: 360px;
+    height: auto;
     border-radius: 50%;
-    flex-shrink: 0;
     transition: transform 0.8s ease-out;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.35);
+  }
+
+  .menu-item img:hover {
+    transform: scale(1.05);
   }
 
   .menu-text {
-    width: 45vw;
-    max-width: 400px;
-    background: rgba(255,255,255,0.5);
+    width: 80%;
+    max-width: 420px;
+    background: rgba(255,255,255,0.6);
     backdrop-filter: blur(4px);
     padding: 20px 25px;
     border-radius: 15px;
@@ -66,10 +66,6 @@
   }
 
   .menu-item.visible { opacity: 1; transform: translateY(0); }
-  .menu-item.visible img { transform: scale(1.05); }
-
-  .menu-item.left .menu-text { margin-left: 5vw; }
-  .menu-item.right .menu-text { margin-right: 5vw; }
 
   h2 {
     font-size: 1.4em;
@@ -89,9 +85,8 @@
   .menu-text .no-dot::before { content: ""; }
 
   @media (max-width: 600px) {
-    .menu-item { flex-direction: column; padding: 20px 0; }
-    .menu-item img { width: 70vw; height: 70vw; margin-bottom: 15px; }
-    .menu-text { width: 80%; text-align: justify; margin: 0 auto; }
+    .menu-item img { width: 70vw; margin-bottom: 15px; }
+    .menu-text { width: 90%; font-size: 1em; }
     h2 { font-size: 1.2em; }
     p { font-size: 0.95em; line-height: 1.6; }
     .header-image { max-height: 100px; }
@@ -104,16 +99,16 @@
 
 <div class="menu-container">
 
-  <div class="menu-item left">
+  <div class="menu-item">
     <img src="zupa.jpg" alt="Zupa serwowana">
     <div class="menu-text">
-      <h2>ZUPAaaaa SERWOWANA</h2>
+      <h2>ZUPA SERWOWANA</h2>
       <p>Tradycyjny rosół drobiowy z makaronem domowym,</p>
       <p>Krem pomidorowy z ziołowymi grzankami - dla wegetarian,</p>
     </div>
   </div>
 
-  <div class="menu-item right">
+  <div class="menu-item">
     <img src="obiad.png" alt="Drugie danie serwowane">
     <div class="menu-text">
       <h2>DRUGIE DANIE SERWOWANE</h2>
@@ -122,7 +117,7 @@
     </div>
   </div>
 
-  <div class="menu-item left">
+  <div class="menu-item">
     <img src="zupawbemarach.png" alt="Zupy w bufecie">
     <div class="menu-text">
       <h2>ZUPY W BUFECIE</h2>
@@ -131,7 +126,7 @@
     </div>
   </div>
 
-  <div class="menu-item right">
+  <div class="menu-item">
     <img src="ciepleprzekaskiwbufecie.png" alt="Ciepłe przekąski w bufecie">
     <div class="menu-text">
       <h2>CIEPŁE PRZEKĄSKI W BUFECIE</h2>
@@ -141,7 +136,7 @@
     </div>
   </div>
 
-  <div class="menu-item left">
+  <div class="menu-item">
     <img src="ziemniakipieczone.png" alt="Dodatki"> 
     <div class="menu-text">
       <h2>DODATKI</h2>
@@ -151,7 +146,7 @@
     </div>
   </div>
 
-  <div class="menu-item right">
+  <div class="menu-item">
     <img src="polmisekmies.png" alt="Przekąski zimne">
     <div class="menu-text">
       <h2>PRZEKĄSKI ZIMNE</h2>
@@ -168,7 +163,7 @@
     </div>
   </div>
 
-  <div class="menu-item left">
+  <div class="menu-item">
     <img src="slodkosci.png" alt="Słodkości i napoje">
     <div class="menu-text">
       <h2>SŁODKOŚCI I NAPOJE</h2>
@@ -193,7 +188,7 @@ const items = document.querySelectorAll('.menu-item');
 function handleScroll() {
   items.forEach(item => {
     const rect = item.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
+    if(rect.top < window.innerHeight * 0.8 && rect.bottom > 0){
       item.classList.add('visible');
     } else {
       item.classList.remove('visible');
@@ -206,7 +201,6 @@ handleScroll();
 
 </body>
 </html>
-
 
 
 
